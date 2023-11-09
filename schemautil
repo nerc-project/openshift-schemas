@@ -1,0 +1,101 @@
+#!/usr/bin/env python3
+
+import click
+import json
+import logging
+import subprocess
+import sys
+
+from pathlib import Path
+
+LOG = logging.getLogger(__name__)
+
+
+@click.group()
+@click.option("--verbose", "-v", count=True)
+def main(verbose):
+    init_logging(verbose)
+
+
+def wrap_schema(name, schema):
+    return {
+        "apiVersion": "org.openapis.spec/v3",
+        "kind": "OpenAPISchema",
+        "metadata": {
+            "name": name,
+        },
+        "definitions": {
+            name: schema,
+        },
+    }
+
+
+@main.command("kustomize")
+@click.argument("schema_directory", type=Path)
+def generate_kustomization(schema_directory):
+    LOG.info("generating %s/kustomization.yaml", schema_directory)
+
+    (schema_directory / "kustomization.yaml").unlink(missing_ok=True)
+    subprocess.run(
+        ["kustomize", "create", "--autodetect", "--recursive"],
+        cwd=schema_directory,
+        check=True,
+    )
+
+
+@main.command("regenerate")
+@click.argument("schema_directory", type=Path)
+def regenerate_schemas(schema_directory):
+    for schemafile in schema_directory.rglob("*.json"):
+        with schemafile.open("r") as fd:
+            spec = json.load(fd)
+
+        name = spec["metadata"]["name"]
+        schema = spec["definitions"][name]
+        LOG.debug("processing %s", name)
+
+        with schemafile.open("w") as fd:
+            json.dump(
+                wrap_schema(name, schema),
+                fd,
+                indent=2,
+            )
+            fd.write("\n")
+
+
+@main.command("fetch")
+@click.option("-o", "--output", default=sys.stdout, type=click.File(mode="w"))
+def fetch_schemas(output):
+    LOG.info("fetching schemas")
+    with output:
+        subprocess.run(["kustomize", "openapi", "fetch"], stdout=output, check=True)
+
+
+@main.command("split")
+@click.option("-d", "--schema-directory", default="schemas", type=Path)
+@click.argument("schemas", type=click.File(mode="r"))
+def split_schemas(schema_directory, schemas):
+    LOG.info("splitting schemas")
+
+    with schemas as fd:
+        all_schemas = json.load(fd)
+
+    for name, schema in all_schemas["definitions"].items():
+        LOG.debug("processing %s", name)
+        apiversion, kind = name.rsplit(".", 1)
+        path = schema_directory / apiversion
+        path.mkdir(parents=True, exist_ok=True)
+
+        with (path / f"{kind}.json").open("w") as fd:
+            json.dump(wrap_schema(name, schema), fd, indent=2)
+            fd.write("\n")
+
+
+def init_logging(verbose):
+    levels = [logging.WARNING, logging.INFO, logging.DEBUG]
+    loglevel = levels[min(verbose, len(levels))]
+    logging.basicConfig(level=loglevel)
+
+
+if __name__ == "__main__":
+    main()
