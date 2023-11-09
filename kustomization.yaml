@@ -5,3 +5,4 @@ resources:
 
 patches:
 - path: patches/io.openshift.config.v1.OAuth.yaml
+- path: patches/io.openshift.multicluster.v1.MultiClusterEngine.yaml

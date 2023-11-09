@@ -1,0 +1,14 @@
+apiVersion: org.openapis.spec/v3
+kind: OpenAPISchema
+metadata:
+  name: io.openshift.multicluster.v1.MultiClusterEngine
+definitions:
+  io.openshift.multicluster.v1.MultiClusterEngine:
+    properties:
+      spec:
+        properties:
+          overrides:
+            properties:
+              components:
+                x-kubernetes-patch-strategy: merge
+                x-kubernetes-patch-merge-key: name
