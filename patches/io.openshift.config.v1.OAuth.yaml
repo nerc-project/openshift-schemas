@@ -1,0 +1,12 @@
+apiVersion: org.openapis.spec/v3
+kind: OpenAPISchema
+metadata:
+  name: io.openshift.config.v1.OAuth
+definitions:
+  io.openshift.config.v1.OAuth:
+    properties:
+      spec:
+        properties:
+          identityProviders:
+            x-kubernetes-patch-strategy: merge
+            x-kubernetes-patch-merge-key: name

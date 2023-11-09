@@ -2,3 +2,6 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
 - schemas
+
+patches:
+- path: patches/io.openshift.config.v1.OAuth.yaml
