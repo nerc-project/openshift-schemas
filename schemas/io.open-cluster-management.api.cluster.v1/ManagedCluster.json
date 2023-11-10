@@ -1,0 +1,47 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "io.open-cluster-management.api.cluster.v1.ManagedCluster",
+    "annotations": {
+      "source-cluster": "nerc-ocp-infra"
+    }
+  },
+  "definitions": {
+    "io.open-cluster-management.api.cluster.v1.ManagedCluster": {
+      "description": "ManagedCluster represents the desired state and current status of managed cluster. ManagedCluster is a cluster scoped resource. The name is the cluster UID.\n\nThe cluster join process follows a double opt-in process:\n\n1. Agent on managed cluster creates CSR on hub with cluster UID and agent name. 2. Agent on managed cluster creates ManagedCluster on hub. 3. Cluster admin on hub approves the CSR for UID and agent name of the ManagedCluster. 4. Cluster admin sets spec.acceptClient of ManagedCluster to true. 5. Cluster admin on managed cluster creates credential of kubeconfig to hub.\n\nOnce the hub creates the cluster namespace, the Klusterlet agent on the ManagedCluster pushes the credential to the hub to use against the kube-apiserver of the ManagedCluster.",
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta_v2"
+        },
+        "spec": {
+          "$ref": "#/definitions/io.open-cluster-management.api.cluster.v1.ManagedClusterSpec",
+          "description": "Spec represents a desired configuration for the agent on the managed cluster."
+        },
+        "status": {
+          "$ref": "#/definitions/io.open-cluster-management.api.cluster.v1.ManagedClusterStatus",
+          "description": "Status represents the current status of joined managed cluster"
+        }
+      },
+      "required": [
+        "spec"
+      ],
+      "type": "object",
+      "x-kubernetes-group-version-kind": [
+        {
+          "group": "clusterview.open-cluster-management.io",
+          "kind": "ManagedCluster",
+          "version": "v1"
+        }
+      ]
+    }
+  }
+}

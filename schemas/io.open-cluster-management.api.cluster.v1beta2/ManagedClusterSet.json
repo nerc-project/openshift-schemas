@@ -1,0 +1,47 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "io.open-cluster-management.api.cluster.v1beta2.ManagedClusterSet",
+    "annotations": {
+      "source-cluster": "nerc-ocp-infra"
+    }
+  },
+  "definitions": {
+    "io.open-cluster-management.api.cluster.v1beta2.ManagedClusterSet": {
+      "description": "ManagedClusterSet defines a group of ManagedClusters that user's workload can run on. A workload can be defined to deployed on a ManagedClusterSet, which mean:\n 1. The workload can run on any ManagedCluster in the ManagedClusterSet\n 2. The workload cannot run on any ManagedCluster outside the ManagedClusterSet\n 3. The service exposed by the workload can be shared in any ManagedCluster in the ManagedClusterSet\n\nIn order to assign a ManagedCluster to a certian ManagedClusterSet, add a label with name `cluster.open-cluster-management.io/clusterset` on the ManagedCluster to refers to the ManagedClusterSet. User is not allow to add/remove this label on a ManagedCluster unless they have a RBAC rule to CREATE on a virtual subresource of managedclustersets/join. In order to update this label, user must have the permission on both the old and new ManagedClusterSet.",
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta_v2"
+        },
+        "spec": {
+          "$ref": "#/definitions/io.open-cluster-management.api.cluster.v1beta2.ManagedClusterSetSpec",
+          "description": "Spec defines the attributes of the ManagedClusterSet"
+        },
+        "status": {
+          "$ref": "#/definitions/io.open-cluster-management.api.cluster.v1beta2.ManagedClusterSetStatus",
+          "description": "Status represents the current status of the ManagedClusterSet"
+        }
+      },
+      "required": [
+        "spec"
+      ],
+      "type": "object",
+      "x-kubernetes-group-version-kind": [
+        {
+          "group": "clusterview.open-cluster-management.io",
+          "kind": "ManagedClusterSet",
+          "version": "v1alpha1"
+        }
+      ]
+    }
+  }
+}

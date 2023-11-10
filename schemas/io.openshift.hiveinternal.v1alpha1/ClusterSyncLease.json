@@ -1,0 +1,51 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "io.openshift.hiveinternal.v1alpha1.ClusterSyncLease",
+    "annotations": {
+      "source-cluster": "nerc-ocp-infra"
+    }
+  },
+  "definitions": {
+    "io.openshift.hiveinternal.v1alpha1.ClusterSyncLease": {
+      "description": "ClusterSyncLease is a record of the last time that SyncSets and SelectorSyncSets were applied to a cluster.",
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta",
+          "description": "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata"
+        },
+        "spec": {
+          "description": "ClusterSyncLeaseSpec is the specification of a ClusterSyncLease.",
+          "properties": {
+            "renewTime": {
+              "description": "RenewTime is the time when SyncSets and SelectorSyncSets were last applied to the cluster.",
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "required": [
+            "renewTime"
+          ],
+          "type": "object"
+        }
+      },
+      "type": "object",
+      "x-kubernetes-group-version-kind": [
+        {
+          "group": "hiveinternal.openshift.io",
+          "kind": "ClusterSyncLease",
+          "version": "v1alpha1"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "io.open-cluster-management.api.cluster.v1.Taint",
+    "annotations": {
+      "source-cluster": "nerc-ocp-infra"
+    }
+  },
+  "definitions": {
+    "io.open-cluster-management.api.cluster.v1.Taint": {
+      "description": "The managed cluster this Taint is attached to has the \"effect\" on any placement that does not tolerate the Taint.",
+      "properties": {
+        "effect": {
+          "description": "Effect indicates the effect of the taint on placements that do not tolerate the taint. Valid effects are NoSelect, PreferNoSelect and NoSelectIfNew.",
+          "type": "string"
+        },
+        "key": {
+          "description": "Key is the taint key applied to a cluster. e.g. bar or foo.example.com/bar. The regex it matches is (dns1123SubdomainFmt/)?(qualifiedNameFmt)",
+          "type": "string"
+        },
+        "timeAdded": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time",
+          "description": "TimeAdded represents the time at which the taint was added."
+        },
+        "value": {
+          "description": "Value is the taint value corresponding to the taint key.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "key",
+        "effect",
+        "timeAdded"
+      ],
+      "type": "object"
+    }
+  }
+}
