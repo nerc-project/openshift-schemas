@@ -1,0 +1,46 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "io.x-k8s.cluster.infrastructure.v1beta1.AWSClusterControllerIdentity",
+    "annotations": {
+      "source-cluster": "hypershift1"
+    }
+  },
+  "definitions": {
+    "io.x-k8s.cluster.infrastructure.v1beta1.AWSClusterControllerIdentity": {
+      "description": "AWSClusterControllerIdentity is the Schema for the awsclustercontrolleridentities API It is used to grant access to use Cluster API Provider AWS Controller credentials.",
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta",
+          "description": "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata"
+        },
+        "spec": {
+          "description": "Spec for this AWSClusterControllerIdentity.",
+          "properties": {
+            "allowedNamespaces": {
+              "description": "AllowedNamespaces is used to identify which namespaces are allowed to use the identity from. Namespaces can be selected either using an array of namespaces or with label selector. An empty allowedNamespaces object indicates that AWSClusters can use this identity from any namespace. If this object is nil, no namespaces will be allowed (default behaviour, if this field is not provided) A namespace should be either in the NamespaceList or match with Selector to use the identity."
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object",
+      "x-kubernetes-group-version-kind": [
+        {
+          "group": "infrastructure.cluster.x-k8s.io",
+          "kind": "AWSClusterControllerIdentity",
+          "version": "v1beta1"
+        }
+      ]
+    }
+  }
+}

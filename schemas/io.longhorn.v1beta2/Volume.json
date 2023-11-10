@@ -1,0 +1,312 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "io.longhorn.v1beta2.Volume",
+    "annotations": {
+      "source-cluster": "hypershift1"
+    }
+  },
+  "definitions": {
+    "io.longhorn.v1beta2.Volume": {
+      "description": "Volume is where Longhorn stores volume object.",
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta",
+          "description": "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata"
+        },
+        "spec": {
+          "description": "VolumeSpec defines the desired state of the Longhorn volume",
+          "properties": {
+            "Standby": {
+              "type": "boolean"
+            },
+            "accessMode": {
+              "enum": [
+                "rwo",
+                "rwx"
+              ],
+              "type": "string"
+            },
+            "backendStoreDriver": {
+              "enum": [
+                "v1",
+                "v2"
+              ],
+              "type": "string"
+            },
+            "backingImage": {
+              "type": "string"
+            },
+            "backupCompressionMethod": {
+              "enum": [
+                "none",
+                "lz4",
+                "gzip"
+              ],
+              "type": "string"
+            },
+            "dataLocality": {
+              "enum": [
+                "disabled",
+                "best-effort",
+                "strict-local"
+              ],
+              "type": "string"
+            },
+            "dataSource": {
+              "type": "string"
+            },
+            "disableFrontend": {
+              "type": "boolean"
+            },
+            "diskSelector": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "encrypted": {
+              "type": "boolean"
+            },
+            "engineImage": {
+              "type": "string"
+            },
+            "fromBackup": {
+              "type": "string"
+            },
+            "frontend": {
+              "enum": [
+                "blockdev",
+                "iscsi",
+                "nvmf",
+                ""
+              ],
+              "type": "string"
+            },
+            "lastAttachedBy": {
+              "type": "string"
+            },
+            "migratable": {
+              "type": "boolean"
+            },
+            "migrationNodeID": {
+              "type": "string"
+            },
+            "nodeID": {
+              "type": "string"
+            },
+            "nodeSelector": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "numberOfReplicas": {
+              "type": "integer"
+            },
+            "offlineReplicaRebuilding": {
+              "description": "OfflineReplicaRebuilding is used to determine if the offline replica rebuilding feature is enabled or not",
+              "enum": [
+                "ignored",
+                "disabled",
+                "enabled"
+              ],
+              "type": "string"
+            },
+            "replicaAutoBalance": {
+              "enum": [
+                "ignored",
+                "disabled",
+                "least-effort",
+                "best-effort"
+              ],
+              "type": "string"
+            },
+            "replicaSoftAntiAffinity": {
+              "description": "Replica soft anti affinity of the volume. Set enabled to allow replicas to be scheduled on the same node",
+              "enum": [
+                "ignored",
+                "enabled",
+                "disabled"
+              ],
+              "type": "string"
+            },
+            "replicaZoneSoftAntiAffinity": {
+              "description": "Replica zone soft anti affinity of the volume. Set enabled to allow replicas to be scheduled in the same zone",
+              "enum": [
+                "ignored",
+                "enabled",
+                "disabled"
+              ],
+              "type": "string"
+            },
+            "restoreVolumeRecurringJob": {
+              "enum": [
+                "ignored",
+                "enabled",
+                "disabled"
+              ],
+              "type": "string"
+            },
+            "revisionCounterDisabled": {
+              "type": "boolean"
+            },
+            "size": {
+              "format": "int64",
+              "type": "string"
+            },
+            "snapshotDataIntegrity": {
+              "enum": [
+                "ignored",
+                "disabled",
+                "enabled",
+                "fast-check"
+              ],
+              "type": "string"
+            },
+            "staleReplicaTimeout": {
+              "type": "integer"
+            },
+            "unmapMarkSnapChainRemoved": {
+              "enum": [
+                "ignored",
+                "disabled",
+                "enabled"
+              ],
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "status": {
+          "description": "VolumeStatus defines the observed state of the Longhorn volume",
+          "properties": {
+            "actualSize": {
+              "format": "int64",
+              "type": "integer"
+            },
+            "cloneStatus": {
+              "properties": {
+                "snapshot": {
+                  "type": "string"
+                },
+                "sourceVolume": {
+                  "type": "string"
+                },
+                "state": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "conditions": {},
+            "currentImage": {
+              "type": "string"
+            },
+            "currentMigrationNodeID": {
+              "description": "the node that this volume is currently migrating to",
+              "type": "string"
+            },
+            "currentNodeID": {
+              "type": "string"
+            },
+            "expansionRequired": {
+              "type": "boolean"
+            },
+            "frontendDisabled": {
+              "type": "boolean"
+            },
+            "isStandby": {
+              "type": "boolean"
+            },
+            "kubernetesStatus": {
+              "properties": {
+                "lastPVCRefAt": {
+                  "type": "string"
+                },
+                "lastPodRefAt": {
+                  "type": "string"
+                },
+                "namespace": {
+                  "description": "determine if PVC/Namespace is history or not",
+                  "type": "string"
+                },
+                "pvName": {
+                  "type": "string"
+                },
+                "pvStatus": {
+                  "type": "string"
+                },
+                "pvcName": {
+                  "type": "string"
+                },
+                "workloadsStatus": {
+                  "description": "determine if Pod/Workload is history or not"
+                }
+              },
+              "type": "object"
+            },
+            "lastBackup": {
+              "type": "string"
+            },
+            "lastBackupAt": {
+              "type": "string"
+            },
+            "lastDegradedAt": {
+              "type": "string"
+            },
+            "offlineReplicaRebuildingRequired": {
+              "type": "boolean"
+            },
+            "ownerID": {
+              "type": "string"
+            },
+            "pendingNodeID": {
+              "description": "Deprecated.",
+              "type": "string"
+            },
+            "remountRequestedAt": {
+              "type": "string"
+            },
+            "restoreInitiated": {
+              "type": "boolean"
+            },
+            "restoreRequired": {
+              "type": "boolean"
+            },
+            "robustness": {
+              "type": "string"
+            },
+            "shareEndpoint": {
+              "type": "string"
+            },
+            "shareState": {
+              "type": "string"
+            },
+            "state": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object",
+      "x-kubernetes-group-version-kind": [
+        {
+          "group": "longhorn.io",
+          "kind": "Volume",
+          "version": "v1beta2"
+        }
+      ]
+    }
+  }
+}

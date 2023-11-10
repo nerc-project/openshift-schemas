@@ -1,0 +1,152 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "io.longhorn.v1beta2.Node",
+    "annotations": {
+      "source-cluster": "hypershift1"
+    }
+  },
+  "definitions": {
+    "io.longhorn.v1beta2.Node": {
+      "description": "Node is where Longhorn stores Longhorn node object.",
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta",
+          "description": "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata"
+        },
+        "spec": {
+          "description": "NodeSpec defines the desired state of the Longhorn node",
+          "properties": {
+            "allowScheduling": {
+              "type": "boolean"
+            },
+            "disks": {
+              "additionalProperties": {
+                "properties": {
+                  "allowScheduling": {
+                    "type": "boolean"
+                  },
+                  "diskType": {
+                    "enum": [
+                      "filesystem",
+                      "block"
+                    ],
+                    "type": "string"
+                  },
+                  "evictionRequested": {
+                    "type": "boolean"
+                  },
+                  "path": {
+                    "type": "string"
+                  },
+                  "storageReserved": {
+                    "format": "int64",
+                    "type": "integer"
+                  },
+                  "tags": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "object"
+            },
+            "evictionRequested": {
+              "type": "boolean"
+            },
+            "instanceManagerCPURequest": {
+              "type": "integer"
+            },
+            "name": {
+              "type": "string"
+            },
+            "tags": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "status": {
+          "description": "NodeStatus defines the observed state of the Longhorn node",
+          "properties": {
+            "conditions": {},
+            "diskStatus": {
+              "additionalProperties": {
+                "properties": {
+                  "conditions": {},
+                  "diskType": {
+                    "type": "string"
+                  },
+                  "diskUUID": {
+                    "type": "string"
+                  },
+                  "scheduledReplica": {
+                    "additionalProperties": {
+                      "format": "int64",
+                      "type": "integer"
+                    }
+                  },
+                  "storageAvailable": {
+                    "format": "int64",
+                    "type": "integer"
+                  },
+                  "storageMaximum": {
+                    "format": "int64",
+                    "type": "integer"
+                  },
+                  "storageScheduled": {
+                    "format": "int64",
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "region": {
+              "type": "string"
+            },
+            "snapshotCheckStatus": {
+              "properties": {
+                "lastPeriodicCheckedAt": {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                "snapshotCheckState": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "zone": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object",
+      "x-kubernetes-group-version-kind": [
+        {
+          "group": "longhorn.io",
+          "kind": "Node",
+          "version": "v1beta2"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "io.longhorn.v1beta2.Backup",
+    "annotations": {
+      "source-cluster": "hypershift1"
+    }
+  },
+  "definitions": {
+    "io.longhorn.v1beta2.Backup": {
+      "description": "Backup is where Longhorn stores backup object.",
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta",
+          "description": "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata"
+        },
+        "spec": {
+          "description": "BackupSpec defines the desired state of the Longhorn backup",
+          "properties": {
+            "labels": {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "description": "The labels of snapshot backup.",
+              "type": "object"
+            },
+            "snapshotName": {
+              "description": "The snapshot name.",
+              "type": "string"
+            },
+            "syncRequestedAt": {
+              "description": "The time to request run sync the remote backup.",
+              "format": "date-time"
+            }
+          },
+          "type": "object"
+        },
+        "status": {
+          "description": "BackupStatus defines the observed state of the Longhorn backup",
+          "properties": {
+            "backupCreatedAt": {
+              "description": "The snapshot backup upload finished time.",
+              "type": "string"
+            },
+            "compressionMethod": {
+              "description": "Compression method",
+              "type": "string"
+            },
+            "error": {
+              "description": "The error message when taking the snapshot backup.",
+              "type": "string"
+            },
+            "labels": {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "description": "The labels of snapshot backup."
+            },
+            "lastSyncedAt": {
+              "description": "The last time that the backup was synced with the remote backup target.",
+              "format": "date-time"
+            },
+            "messages": {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "description": "The error messages when calling longhorn engine on listing or inspecting backups."
+            },
+            "ownerID": {
+              "description": "The node ID on which the controller is responsible to reconcile this backup CR.",
+              "type": "string"
+            },
+            "progress": {
+              "description": "The snapshot backup progress.",
+              "type": "integer"
+            },
+            "replicaAddress": {
+              "description": "The address of the replica that runs snapshot backup.",
+              "type": "string"
+            },
+            "size": {
+              "description": "The snapshot size.",
+              "type": "string"
+            },
+            "snapshotCreatedAt": {
+              "description": "The snapshot creation time.",
+              "type": "string"
+            },
+            "snapshotName": {
+              "description": "The snapshot name.",
+              "type": "string"
+            },
+            "state": {
+              "description": "The backup creation state. Can be \"\", \"InProgress\", \"Completed\", \"Error\", \"Unknown\".",
+              "type": "string"
+            },
+            "url": {
+              "description": "The snapshot backup URL.",
+              "type": "string"
+            },
+            "volumeBackingImageName": {
+              "description": "The volume's backing image name.",
+              "type": "string"
+            },
+            "volumeCreated": {
+              "description": "The volume creation time.",
+              "type": "string"
+            },
+            "volumeName": {
+              "description": "The volume name.",
+              "type": "string"
+            },
+            "volumeSize": {
+              "description": "The volume size.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object",
+      "x-kubernetes-group-version-kind": [
+        {
+          "group": "longhorn.io",
+          "kind": "Backup",
+          "version": "v1beta2"
+        }
+      ]
+    }
+  }
+}

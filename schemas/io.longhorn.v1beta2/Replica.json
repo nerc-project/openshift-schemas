@@ -1,0 +1,148 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "io.longhorn.v1beta2.Replica",
+    "annotations": {
+      "source-cluster": "hypershift1"
+    }
+  },
+  "definitions": {
+    "io.longhorn.v1beta2.Replica": {
+      "description": "Replica is where Longhorn stores replica object.",
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta",
+          "description": "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata"
+        },
+        "spec": {
+          "description": "ReplicaSpec defines the desired state of the Longhorn replica",
+          "properties": {
+            "active": {
+              "type": "boolean"
+            },
+            "backendStoreDriver": {
+              "enum": [
+                "v1",
+                "v2"
+              ],
+              "type": "string"
+            },
+            "backingImage": {
+              "type": "string"
+            },
+            "dataDirectoryName": {
+              "type": "string"
+            },
+            "desireState": {
+              "type": "string"
+            },
+            "diskID": {
+              "type": "string"
+            },
+            "diskPath": {
+              "type": "string"
+            },
+            "engineImage": {
+              "type": "string"
+            },
+            "engineName": {
+              "type": "string"
+            },
+            "failedAt": {
+              "type": "string"
+            },
+            "hardNodeAffinity": {
+              "type": "string"
+            },
+            "healthyAt": {
+              "type": "string"
+            },
+            "logRequested": {
+              "type": "boolean"
+            },
+            "nodeID": {
+              "type": "string"
+            },
+            "rebuildRetryCount": {
+              "type": "integer"
+            },
+            "revisionCounterDisabled": {
+              "type": "boolean"
+            },
+            "salvageRequested": {
+              "type": "boolean"
+            },
+            "unmapMarkDiskChainRemovedEnabled": {
+              "type": "boolean"
+            },
+            "volumeName": {
+              "type": "string"
+            },
+            "volumeSize": {
+              "format": "int64",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "status": {
+          "description": "ReplicaStatus defines the observed state of the Longhorn replica",
+          "properties": {
+            "conditions": {},
+            "currentImage": {
+              "type": "string"
+            },
+            "currentState": {
+              "type": "string"
+            },
+            "evictionRequested": {
+              "type": "boolean"
+            },
+            "instanceManagerName": {
+              "type": "string"
+            },
+            "ip": {
+              "type": "string"
+            },
+            "logFetched": {
+              "type": "boolean"
+            },
+            "ownerID": {
+              "type": "string"
+            },
+            "port": {
+              "type": "integer"
+            },
+            "salvageExecuted": {
+              "type": "boolean"
+            },
+            "started": {
+              "type": "boolean"
+            },
+            "storageIP": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object",
+      "x-kubernetes-group-version-kind": [
+        {
+          "group": "longhorn.io",
+          "kind": "Replica",
+          "version": "v1beta2"
+        }
+      ]
+    }
+  }
+}

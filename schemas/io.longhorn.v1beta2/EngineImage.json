@@ -1,0 +1,101 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "io.longhorn.v1beta2.EngineImage",
+    "annotations": {
+      "source-cluster": "hypershift1"
+    }
+  },
+  "definitions": {
+    "io.longhorn.v1beta2.EngineImage": {
+      "description": "EngineImage is where Longhorn stores engine image object.",
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta",
+          "description": "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata"
+        },
+        "spec": {
+          "description": "EngineImageSpec defines the desired state of the Longhorn engine image",
+          "properties": {
+            "image": {
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "image"
+          ],
+          "type": "object"
+        },
+        "status": {
+          "description": "EngineImageStatus defines the observed state of the Longhorn engine image",
+          "properties": {
+            "buildDate": {
+              "type": "string"
+            },
+            "cliAPIMinVersion": {
+              "type": "integer"
+            },
+            "cliAPIVersion": {
+              "type": "integer"
+            },
+            "conditions": {},
+            "controllerAPIMinVersion": {
+              "type": "integer"
+            },
+            "controllerAPIVersion": {
+              "type": "integer"
+            },
+            "dataFormatMinVersion": {
+              "type": "integer"
+            },
+            "dataFormatVersion": {
+              "type": "integer"
+            },
+            "gitCommit": {
+              "type": "string"
+            },
+            "noRefSince": {
+              "type": "string"
+            },
+            "nodeDeploymentMap": {
+              "additionalProperties": {
+                "type": "boolean"
+              }
+            },
+            "ownerID": {
+              "type": "string"
+            },
+            "refCount": {
+              "type": "integer"
+            },
+            "state": {
+              "type": "string"
+            },
+            "version": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object",
+      "x-kubernetes-group-version-kind": [
+        {
+          "group": "longhorn.io",
+          "kind": "EngineImage",
+          "version": "v1beta2"
+        }
+      ]
+    }
+  }
+}

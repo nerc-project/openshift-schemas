@@ -1,0 +1,109 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "io.longhorn.v1beta2.BackingImage",
+    "annotations": {
+      "source-cluster": "hypershift1"
+    }
+  },
+  "definitions": {
+    "io.longhorn.v1beta2.BackingImage": {
+      "description": "BackingImage is where Longhorn stores backing image object.",
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta",
+          "description": "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata"
+        },
+        "spec": {
+          "description": "BackingImageSpec defines the desired state of the Longhorn backing image",
+          "properties": {
+            "checksum": {
+              "type": "string"
+            },
+            "disks": {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            "sourceParameters": {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            "sourceType": {
+              "enum": [
+                "download",
+                "upload",
+                "export-from-volume"
+              ],
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "status": {
+          "description": "BackingImageStatus defines the observed state of the Longhorn backing image status",
+          "properties": {
+            "checksum": {
+              "type": "string"
+            },
+            "diskFileStatusMap": {
+              "additionalProperties": {
+                "properties": {
+                  "lastStateTransitionTime": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "progress": {
+                    "type": "integer"
+                  },
+                  "state": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "diskLastRefAtMap": {
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "ownerID": {
+              "type": "string"
+            },
+            "size": {
+              "format": "int64",
+              "type": "integer"
+            },
+            "uuid": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object",
+      "x-kubernetes-group-version-kind": [
+        {
+          "group": "longhorn.io",
+          "kind": "BackingImage",
+          "version": "v1beta2"
+        }
+      ]
+    }
+  }
+}

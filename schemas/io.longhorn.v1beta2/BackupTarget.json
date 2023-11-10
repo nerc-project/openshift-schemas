@@ -1,0 +1,80 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "io.longhorn.v1beta2.BackupTarget",
+    "annotations": {
+      "source-cluster": "hypershift1"
+    }
+  },
+  "definitions": {
+    "io.longhorn.v1beta2.BackupTarget": {
+      "description": "BackupTarget is where Longhorn stores backup target object.",
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta",
+          "description": "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata"
+        },
+        "spec": {
+          "description": "BackupTargetSpec defines the desired state of the Longhorn backup target",
+          "properties": {
+            "backupTargetURL": {
+              "description": "The backup target URL.",
+              "type": "string"
+            },
+            "credentialSecret": {
+              "description": "The backup target credential secret.",
+              "type": "string"
+            },
+            "pollInterval": {
+              "description": "The interval that the cluster needs to run sync with the backup target.",
+              "type": "string"
+            },
+            "syncRequestedAt": {
+              "description": "The time to request run sync the remote backup target.",
+              "format": "date-time"
+            }
+          },
+          "type": "object"
+        },
+        "status": {
+          "description": "BackupTargetStatus defines the observed state of the Longhorn backup target",
+          "properties": {
+            "available": {
+              "description": "Available indicates if the remote backup target is available or not.",
+              "type": "boolean"
+            },
+            "conditions": {
+              "description": "Records the reason on why the backup target is unavailable."
+            },
+            "lastSyncedAt": {
+              "description": "The last time that the controller synced with the remote backup target.",
+              "format": "date-time"
+            },
+            "ownerID": {
+              "description": "The node ID on which the controller is responsible to reconcile this backup target CR.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object",
+      "x-kubernetes-group-version-kind": [
+        {
+          "group": "longhorn.io",
+          "kind": "BackupTarget",
+          "version": "v1beta2"
+        }
+      ]
+    }
+  }
+}
