@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+"""schemautil -- a hacky tool for managing our schema repository
+"""
+
 import click
 import json
 import logging
@@ -13,6 +16,10 @@ LOG = logging.getLogger(__name__)
 
 
 class Schema:
+    """Utility class for represenating an openapi schema definition. Has
+    methods for reading in and writing out the faux-manifest documents
+    we use so that we can patch schemas using kustomize."""
+
     def __init__(
         self,
         name: str,
@@ -45,6 +52,9 @@ class Schema:
             return cls.from_manifest(manifest)
 
     def as_dict(self) -> dict[str, Any]:
+        """Return a dictionary representation of this Schema. Suitable
+        for writing out to a file."""
+
         metadata = {"name": self.name}
         if self.labels:
             metadata["labels"] = self.labels
@@ -84,6 +94,10 @@ def main(verbose):
 @main.command("kustomize")
 @click.argument("schema_directory", type=Path)
 def generate_kustomization(schema_directory):
+    """Generate `<schema_directory>/kustomization.yaml` by running
+    `kustomize create --autodetect --recursive` in
+    `schema_directory`."""
+
     LOG.info("generating %s/kustomization.yaml", schema_directory)
 
     (schema_directory / "kustomization.yaml").unlink(missing_ok=True)
@@ -99,6 +113,11 @@ def generate_kustomization(schema_directory):
 @click.option("--annotation", "-a", "annotations", multiple=True)
 @click.argument("schema_directory", type=Path)
 def regenerate_schemas(schema_directory, labels, annotations):
+    """Regenerate all the schema files in `schema_directory`
+    by reading them in and writing them back out. Use this to add
+    labels or annotations or to apply changes to the schema
+    template."""
+
     for schemafile in schema_directory.rglob("*.json"):
         schema = Schema.from_manifest_file(schemafile)
         schema.update_labels(labels)
@@ -117,6 +136,8 @@ def regenerate_schemas(schema_directory, labels, annotations):
 @main.command("fetch")
 @click.option("-o", "--output", default=sys.stdout, type=click.File(mode="w"))
 def fetch_schemas(output):
+    """Fetch openapi schemas from Kubernetes by running `kustomize openapi fetch`."""
+
     LOG.info("fetching schemas")
     with output:
         subprocess.run(["kustomize", "openapi", "fetch"], stdout=output, check=True)
@@ -128,6 +149,9 @@ def fetch_schemas(output):
 @click.option("--annotation", "-a", "annotations", multiple=True)
 @click.argument("schemas", type=click.File(mode="r"))
 def split_schemas(schema_directory, schemas, labels, annotations):
+    """Split an openapi schema into one-file-per-definition manifests.
+    Apply labels and/or annotations as requested."""
+
     LOG.info("splitting schemas")
 
     with schemas as fd:
