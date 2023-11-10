@@ -1,0 +1,143 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "io.rook.ceph.v1.CephBucketTopic",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "io.rook.ceph.v1.CephBucketTopic": {
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta",
+          "description": "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata"
+        },
+        "spec": {
+          "properties": {
+            "endpoint": {
+              "properties": {
+                "amqp": {
+                  "properties": {
+                    "ackLevel": {
+                      "enum": [
+                        "none",
+                        "broker",
+                        "routeable"
+                      ],
+                      "type": "string"
+                    },
+                    "disableVerifySSL": {
+                      "type": "boolean"
+                    },
+                    "exchange": {
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    "uri": {
+                      "minLength": 1,
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "exchange",
+                    "uri"
+                  ],
+                  "type": "object"
+                },
+                "http": {
+                  "properties": {
+                    "disableVerifySSL": {
+                      "type": "boolean"
+                    },
+                    "sendCloudEvents": {
+                      "type": "boolean"
+                    },
+                    "uri": {
+                      "minLength": 1,
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "uri"
+                  ],
+                  "type": "object"
+                },
+                "kafka": {
+                  "properties": {
+                    "ackLevel": {
+                      "enum": [
+                        "none",
+                        "broker"
+                      ],
+                      "type": "string"
+                    },
+                    "disableVerifySSL": {
+                      "type": "boolean"
+                    },
+                    "uri": {
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    "useSSL": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "uri"
+                  ],
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            },
+            "objectStoreName": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "objectStoreNamespace": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "opaqueData": {
+              "type": "string"
+            },
+            "persistent": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "endpoint",
+            "objectStoreName",
+            "objectStoreNamespace"
+          ],
+          "type": "object"
+        },
+        "status": {
+          "x-kubernetes-preserve-unknown-fields": true
+        }
+      },
+      "required": [
+        "metadata",
+        "spec"
+      ],
+      "type": "object",
+      "x-kubernetes-group-version-kind": [
+        {
+          "group": "ceph.rook.io",
+          "kind": "CephBucketTopic",
+          "version": "v1"
+        }
+      ]
+    }
+  }
+}

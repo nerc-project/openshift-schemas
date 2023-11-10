@@ -1,0 +1,41 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "com.github.openshift.api.authorization.v1.SubjectRulesReviewSpec",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "com.github.openshift.api.authorization.v1.SubjectRulesReviewSpec": {
+      "description": "SubjectRulesReviewSpec adds information about how to conduct the check",
+      "properties": {
+        "groups": {
+          "description": "Groups is optional.  Groups is the list of groups to which the User belongs.  At least one of User and Groups must be specified.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "scopes": {
+          "description": "Scopes to use for the evaluation.  Empty means \"use the unscoped (full) permissions of the user/groups\".",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "user": {
+          "description": "User is optional.  At least one of User and Groups must be specified.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "user",
+        "groups",
+        "scopes"
+      ],
+      "type": "object"
+    }
+  }
+}

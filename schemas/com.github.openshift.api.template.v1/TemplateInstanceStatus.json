@@ -1,0 +1,32 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "com.github.openshift.api.template.v1.TemplateInstanceStatus",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "com.github.openshift.api.template.v1.TemplateInstanceStatus": {
+      "description": "TemplateInstanceStatus describes the current state of a TemplateInstance.",
+      "properties": {
+        "conditions": {
+          "description": "conditions represent the latest available observations of a TemplateInstance's current state.",
+          "items": {
+            "$ref": "#/definitions/com.github.openshift.api.template.v1.TemplateInstanceCondition"
+          },
+          "type": "array"
+        },
+        "objects": {
+          "description": "Objects references the objects created by the TemplateInstance.",
+          "items": {
+            "$ref": "#/definitions/com.github.openshift.api.template.v1.TemplateInstanceObject"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

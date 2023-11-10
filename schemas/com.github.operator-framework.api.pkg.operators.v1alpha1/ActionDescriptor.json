@@ -1,0 +1,40 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "com.github.operator-framework.api.pkg.operators.v1alpha1.ActionDescriptor",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "com.github.operator-framework.api.pkg.operators.v1alpha1.ActionDescriptor": {
+      "description": "ActionDescriptor describes a declarative action that can be performed on a custom resource instance",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "value": {
+          "format": "byte",
+          "type": "string"
+        },
+        "x-descriptors": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "type": "object"
+    }
+  }
+}

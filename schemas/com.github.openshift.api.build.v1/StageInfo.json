@@ -1,0 +1,38 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "com.github.openshift.api.build.v1.StageInfo",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "com.github.openshift.api.build.v1.StageInfo": {
+      "description": "StageInfo contains details about a build stage.",
+      "properties": {
+        "durationMilliseconds": {
+          "description": "durationMilliseconds identifies how long the stage took to complete in milliseconds. Note: the duration of a stage can exceed the sum of the duration of the steps within the stage as not all actions are accounted for in explicit build steps.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "name": {
+          "description": "name is a unique identifier for each build stage that occurs.",
+          "type": "string"
+        },
+        "startTime": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time",
+          "description": "startTime is a timestamp representing the server time when this Stage started. It is represented in RFC3339 form and is in UTC."
+        },
+        "steps": {
+          "description": "steps contains details about each step that occurs during a build stage including start time and duration in milliseconds.",
+          "items": {
+            "$ref": "#/definitions/com.github.openshift.api.build.v1.StepInfo"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "io.openshift.csiaddons.v1alpha1.CSIAddonsNode",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "io.openshift.csiaddons.v1alpha1.CSIAddonsNode": {
+      "description": "CSIAddonsNode is the Schema for the csiaddonsnode API",
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta",
+          "description": "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata"
+        },
+        "spec": {
+          "description": "CSIAddonsNodeSpec defines the desired state of CSIAddonsNode",
+          "properties": {
+            "driver": {
+              "description": "Driver is the information of the CSI Driver existing on a node. If the driver is uninstalled, this can become empty.",
+              "properties": {
+                "endpoint": {
+                  "description": "EndPoint is url that contains the ip-address to which the CSI-Addons side-car listens to.",
+                  "type": "string"
+                },
+                "name": {
+                  "description": "Name is the name of the CSI driver that this object refers to. This must be the same name returned by the CSI-Addons GetIdentity() call for that driver. The name of the driver is in the format: `example.csi.ceph.com`",
+                  "type": "string"
+                },
+                "nodeID": {
+                  "description": "NodeID is the ID of the node to identify on which node the side-car is running.",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "endpoint",
+                "name",
+                "nodeID"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "driver"
+          ],
+          "type": "object"
+        },
+        "status": {
+          "description": "CSIAddonsNodeStatus defines the observed state of CSIAddonsNode",
+          "properties": {
+            "message": {
+              "description": "Message is a human-readable message indicating details about why the CSIAddonsNode is in this state.",
+              "type": "string"
+            },
+            "reason": {
+              "description": "Reason is a brief CamelCase string that describes any failure and is meant for machine parsing and tidy display in the CLI.",
+              "type": "string"
+            },
+            "state": {
+              "description": "State represents the state of the CSIAddonsNode object. It informs whether or not the CSIAddonsNode is Connected to the CSI Driver.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "spec"
+      ],
+      "type": "object",
+      "x-kubernetes-group-version-kind": [
+        {
+          "group": "csiaddons.openshift.io",
+          "kind": "CSIAddonsNode",
+          "version": "v1alpha1"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,504 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "io.amq.broker.v1alpha1.ActiveMQArtemisSecurity",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "io.amq.broker.v1alpha1.ActiveMQArtemisSecurity": {
+      "description": "ActiveMQArtemisSecurity is the Schema for the activemqartemissecurities API",
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta",
+          "description": "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata"
+        },
+        "spec": {
+          "description": "ActiveMQArtemisSecuritySpec defines the desired state of ActiveMQArtemisSecurity",
+          "properties": {
+            "applyToCrNames": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "loginModules": {
+              "properties": {
+                "guestLoginModules": {
+                  "items": {
+                    "properties": {
+                      "guestRole": {
+                        "type": "string"
+                      },
+                      "guestUser": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "keycloakLoginModules": {
+                  "items": {
+                    "properties": {
+                      "configuration": {
+                        "properties": {
+                          "allowAnyHostName": {
+                            "type": "boolean"
+                          },
+                          "alwaysRefreshToken": {
+                            "type": "boolean"
+                          },
+                          "authServerUrl": {
+                            "type": "string"
+                          },
+                          "autoDetectBearerOnly": {
+                            "type": "boolean"
+                          },
+                          "bearerOnly": {
+                            "type": "boolean"
+                          },
+                          "clientKeyPassword": {
+                            "type": "string"
+                          },
+                          "clientKeyStore": {
+                            "type": "string"
+                          },
+                          "clientKeyStorePassword": {
+                            "type": "string"
+                          },
+                          "confidentialPort": {
+                            "format": "int32",
+                            "type": "integer"
+                          },
+                          "connectionPoolSize": {
+                            "format": "int64",
+                            "type": "integer"
+                          },
+                          "corsAllowedHeaders": {
+                            "type": "string"
+                          },
+                          "corsAllowedMethods": {
+                            "type": "string"
+                          },
+                          "corsExposedHeaders": {
+                            "type": "string"
+                          },
+                          "corsMaxAge": {
+                            "format": "int64",
+                            "type": "integer"
+                          },
+                          "credentials": {
+                            "items": {
+                              "properties": {
+                                "key": {
+                                  "type": "string"
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "type": "array"
+                          },
+                          "disableTrustManager": {
+                            "type": "boolean"
+                          },
+                          "enableBasicAuth": {
+                            "type": "boolean"
+                          },
+                          "enableCors": {
+                            "type": "boolean"
+                          },
+                          "exposeToken": {
+                            "type": "boolean"
+                          },
+                          "ignoreOauthQueryParameter": {
+                            "type": "boolean"
+                          },
+                          "minTimeBetweenJwksRequests": {
+                            "format": "int64",
+                            "type": "integer"
+                          },
+                          "principalAttribute": {
+                            "type": "string"
+                          },
+                          "proxyUrl": {
+                            "type": "string"
+                          },
+                          "publicClient": {
+                            "type": "boolean"
+                          },
+                          "publicKeyCacheTtl": {
+                            "format": "int64",
+                            "type": "integer"
+                          },
+                          "realm": {
+                            "type": "string"
+                          },
+                          "realmPublicKey": {
+                            "type": "string"
+                          },
+                          "redirectRewriteRules": {
+                            "items": {
+                              "properties": {
+                                "key": {
+                                  "type": "string"
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "type": "array"
+                          },
+                          "registerNodeAtStartup": {
+                            "type": "boolean"
+                          },
+                          "registerNodePeriod": {
+                            "format": "int64",
+                            "type": "integer"
+                          },
+                          "resource": {
+                            "type": "string"
+                          },
+                          "scope": {
+                            "type": "string"
+                          },
+                          "sslRequired": {
+                            "type": "string"
+                          },
+                          "tokenCookiePath": {
+                            "type": "string"
+                          },
+                          "tokenMinimumTimeToLive": {
+                            "format": "int64",
+                            "type": "integer"
+                          },
+                          "tokenStore": {
+                            "type": "string"
+                          },
+                          "trustStore": {
+                            "type": "string"
+                          },
+                          "trustStorePassword": {
+                            "type": "string"
+                          },
+                          "turnOffChangeSessionIdOnLogin": {
+                            "type": "boolean"
+                          },
+                          "useResourceRoleMappings": {
+                            "type": "boolean"
+                          },
+                          "verifyTokenAudience": {
+                            "type": "boolean"
+                          }
+                        },
+                        "required": [
+                          "enableBasicAuth"
+                        ],
+                        "type": "object"
+                      },
+                      "moduleType": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "propertiesLoginModules": {
+                  "items": {
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "users": {
+                        "items": {
+                          "properties": {
+                            "name": {
+                              "type": "string"
+                            },
+                            "password": {
+                              "type": "string"
+                            },
+                            "roles": {
+                              "items": {
+                                "type": "string"
+                              },
+                              "type": "array"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            },
+            "securityDomains": {
+              "properties": {
+                "brokerDomain": {
+                  "properties": {
+                    "loginModules": {
+                      "items": {
+                        "properties": {
+                          "debug": {
+                            "type": "boolean"
+                          },
+                          "flag": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "reload": {
+                            "type": "boolean"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "consoleDomain": {
+                  "properties": {
+                    "loginModules": {
+                      "items": {
+                        "properties": {
+                          "debug": {
+                            "type": "boolean"
+                          },
+                          "flag": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "reload": {
+                            "type": "boolean"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            },
+            "securitySettings": {
+              "properties": {
+                "broker": {
+                  "items": {
+                    "properties": {
+                      "match": {
+                        "type": "string"
+                      },
+                      "permissions": {
+                        "items": {
+                          "properties": {
+                            "operationType": {
+                              "type": "string"
+                            },
+                            "roles": {
+                              "items": {
+                                "type": "string"
+                              },
+                              "type": "array"
+                            }
+                          },
+                          "required": [
+                            "operationType"
+                          ],
+                          "type": "object"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "management": {
+                  "properties": {
+                    "authorisation": {
+                      "properties": {
+                        "allowedList": {
+                          "items": {
+                            "properties": {
+                              "domain": {
+                                "type": "string"
+                              },
+                              "key": {
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": "array"
+                        },
+                        "defaultAccess": {
+                          "items": {
+                            "properties": {
+                              "method": {
+                                "type": "string"
+                              },
+                              "roles": {
+                                "items": {
+                                  "type": "string"
+                                },
+                                "type": "array"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": "array"
+                        },
+                        "roleAccess": {
+                          "items": {
+                            "properties": {
+                              "accessList": {
+                                "items": {
+                                  "properties": {
+                                    "method": {
+                                      "type": "string"
+                                    },
+                                    "roles": {
+                                      "items": {
+                                        "type": "string"
+                                      },
+                                      "type": "array"
+                                    }
+                                  },
+                                  "type": "object"
+                                },
+                                "type": "array"
+                              },
+                              "domain": {
+                                "type": "string"
+                              },
+                              "key": {
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": "array"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "connector": {
+                      "properties": {
+                        "authenticatorType": {
+                          "type": "string"
+                        },
+                        "host": {
+                          "type": "string"
+                        },
+                        "jmxRealm": {
+                          "type": "string"
+                        },
+                        "keyStorePassword": {
+                          "type": "string"
+                        },
+                        "keyStorePath": {
+                          "type": "string"
+                        },
+                        "keyStoreProvider": {
+                          "type": "string"
+                        },
+                        "objectName": {
+                          "type": "string"
+                        },
+                        "passwordCodec": {
+                          "type": "string"
+                        },
+                        "port": {
+                          "format": "int32",
+                          "type": "integer"
+                        },
+                        "rmiRegistryPort": {
+                          "format": "int32",
+                          "type": "integer"
+                        },
+                        "secured": {
+                          "type": "boolean"
+                        },
+                        "trustStorePassword": {
+                          "type": "string"
+                        },
+                        "trustStorePath": {
+                          "type": "string"
+                        },
+                        "trustStoreProvider": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "hawtioRoles": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        },
+        "status": {
+          "description": "ActiveMQArtemisSecurityStatus defines the observed state of ActiveMQArtemisSecurity",
+          "type": "object"
+        }
+      },
+      "type": "object",
+      "x-kubernetes-group-version-kind": [
+        {
+          "group": "broker.amq.io",
+          "kind": "ActiveMQArtemisSecurity",
+          "version": "v1alpha1"
+        }
+      ]
+    }
+  }
+}

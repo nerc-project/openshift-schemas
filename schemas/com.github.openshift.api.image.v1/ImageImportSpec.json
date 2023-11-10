@@ -1,0 +1,41 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "com.github.openshift.api.image.v1.ImageImportSpec",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "com.github.openshift.api.image.v1.ImageImportSpec": {
+      "description": "ImageImportSpec describes a request to import a specific image.",
+      "properties": {
+        "from": {
+          "$ref": "#/definitions/io.k8s.api.core.v1.ObjectReference",
+          "description": "From is the source of an image to import; only kind DockerImage is allowed"
+        },
+        "importPolicy": {
+          "$ref": "#/definitions/com.github.openshift.api.image.v1.TagImportPolicy",
+          "description": "ImportPolicy is the policy controlling how the image is imported"
+        },
+        "includeManifest": {
+          "description": "IncludeManifest determines if the manifest for each image is returned in the response",
+          "type": "boolean"
+        },
+        "referencePolicy": {
+          "$ref": "#/definitions/com.github.openshift.api.image.v1.TagReferencePolicy",
+          "description": "ReferencePolicy defines how other components should consume the image"
+        },
+        "to": {
+          "$ref": "#/definitions/io.k8s.api.core.v1.LocalObjectReference",
+          "description": "To is a tag in the current image stream to assign the imported image to, if name is not specified the default tag from from.name will be used"
+        }
+      },
+      "required": [
+        "from"
+      ],
+      "type": "object"
+    }
+  }
+}

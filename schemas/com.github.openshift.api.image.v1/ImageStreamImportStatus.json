@@ -1,0 +1,33 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "com.github.openshift.api.image.v1.ImageStreamImportStatus",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "com.github.openshift.api.image.v1.ImageStreamImportStatus": {
+      "description": "ImageStreamImportStatus contains information about the status of an image stream import.",
+      "properties": {
+        "images": {
+          "description": "Images is set with the result of importing spec.images",
+          "items": {
+            "$ref": "#/definitions/com.github.openshift.api.image.v1.ImageImportStatus"
+          },
+          "type": "array"
+        },
+        "import": {
+          "$ref": "#/definitions/com.github.openshift.api.image.v1.ImageStream",
+          "description": "Import is the image stream that was successfully updated or created when 'to' was set."
+        },
+        "repository": {
+          "$ref": "#/definitions/com.github.openshift.api.image.v1.RepositoryImportStatus",
+          "description": "Repository is set if spec.repository was set to the outcome of the import"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "com.github.openshift.api.security.v1.RangeAllocation",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "com.github.openshift.api.security.v1.RangeAllocation": {
+      "description": "RangeAllocation is used so we can easily expose a RangeAllocation typed for security group\n\nCompatibility level 4: No compatibility is provided, the API can change at any point for any reason. These capabilities should not be used by applications needing long term support.",
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+          "type": "string"
+        },
+        "data": {
+          "description": "data is a byte array representing the serialized state of a range allocation.  It is a bitmap with each bit set to one to represent a range is taken.",
+          "format": "byte",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
+        },
+        "range": {
+          "description": "range is a string representing a unique label for a range of uids, \"1000000000-2000000000/10000\".",
+          "type": "string"
+        }
+      },
+      "required": [
+        "range",
+        "data"
+      ],
+      "type": "object",
+      "x-kubernetes-group-version-kind": [
+        {
+          "group": "security.openshift.io",
+          "kind": "RangeAllocation",
+          "version": "v1"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "com.github.openshift.api.apps.v1.DeploymentDetails",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "com.github.openshift.api.apps.v1.DeploymentDetails": {
+      "description": "DeploymentDetails captures information about the causes of a deployment.",
+      "properties": {
+        "causes": {
+          "description": "Causes are extended data associated with all the causes for creating a new deployment",
+          "items": {
+            "$ref": "#/definitions/com.github.openshift.api.apps.v1.DeploymentCause"
+          },
+          "type": "array"
+        },
+        "message": {
+          "description": "Message is the user specified change message, if this deployment was triggered manually by the user",
+          "type": "string"
+        }
+      },
+      "required": [
+        "causes"
+      ],
+      "type": "object"
+    }
+  }
+}

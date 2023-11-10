@@ -1,0 +1,46 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "com.github.openshift.api.image.v1.SignatureCondition",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "com.github.openshift.api.image.v1.SignatureCondition": {
+      "description": "SignatureCondition describes an image signature condition of particular kind at particular probe time.",
+      "properties": {
+        "lastProbeTime": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time",
+          "description": "Last time the condition was checked."
+        },
+        "lastTransitionTime": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time",
+          "description": "Last time the condition transit from one status to another."
+        },
+        "message": {
+          "description": "Human readable message indicating details about last transition.",
+          "type": "string"
+        },
+        "reason": {
+          "description": "(brief) reason for the condition's last transition.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Status of the condition, one of True, False, Unknown.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of signature condition, Complete or Failed.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "status"
+      ],
+      "type": "object"
+    }
+  }
+}

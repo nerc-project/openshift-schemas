@@ -1,0 +1,37 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "com.github.openshift.api.build.v1.BuildVolumeSource",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "com.github.openshift.api.build.v1.BuildVolumeSource": {
+      "description": "BuildVolumeSource represents the source of a volume to mount Only one of its supported types may be specified at any given time.",
+      "properties": {
+        "configMap": {
+          "$ref": "#/definitions/io.k8s.api.core.v1.ConfigMapVolumeSource",
+          "description": "configMap represents a ConfigMap that should populate this volume"
+        },
+        "csi": {
+          "$ref": "#/definitions/io.k8s.api.core.v1.CSIVolumeSource",
+          "description": "csi represents ephemeral storage provided by external CSI drivers which support this capability"
+        },
+        "secret": {
+          "$ref": "#/definitions/io.k8s.api.core.v1.SecretVolumeSource",
+          "description": "secret represents a Secret that should populate this volume. More info: https://kubernetes.io/docs/concepts/storage/volumes#secret"
+        },
+        "type": {
+          "description": "type is the BuildVolumeSourceType for the volume source. Type must match the populated volume source. Valid types are: Secret, ConfigMap",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "type": "object"
+    }
+  }
+}

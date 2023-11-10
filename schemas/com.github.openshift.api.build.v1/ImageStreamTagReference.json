@@ -1,0 +1,26 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "com.github.openshift.api.build.v1.ImageStreamTagReference",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "com.github.openshift.api.build.v1.ImageStreamTagReference": {
+      "description": "ImageStreamTagReference references the ImageStreamTag in an image change trigger by namespace and name.",
+      "properties": {
+        "name": {
+          "description": "name is the name of the ImageStreamTag for an ImageChangeTrigger",
+          "type": "string"
+        },
+        "namespace": {
+          "description": "namespace is the namespace where the ImageStreamTag for an ImageChangeTrigger is located",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

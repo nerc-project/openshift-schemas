@@ -1,0 +1,26 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "com.github.openshift.api.apps.v1.DeploymentTriggerPolicy",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "com.github.openshift.api.apps.v1.DeploymentTriggerPolicy": {
+      "description": "DeploymentTriggerPolicy describes a policy for a single trigger that results in a new deployment.",
+      "properties": {
+        "imageChangeParams": {
+          "$ref": "#/definitions/com.github.openshift.api.apps.v1.DeploymentTriggerImageChangeParams",
+          "description": "ImageChangeParams represents the parameters for the ImageChange trigger."
+        },
+        "type": {
+          "description": "Type of the trigger",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

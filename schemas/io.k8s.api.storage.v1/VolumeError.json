@@ -1,0 +1,26 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "io.k8s.api.storage.v1.VolumeError",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "io.k8s.api.storage.v1.VolumeError": {
+      "description": "VolumeError captures an error encountered during a volume operation.",
+      "properties": {
+        "message": {
+          "description": "String detailing the error encountered during Attach or Detach operation. This string may be logged, so it should not contain sensitive information.",
+          "type": "string"
+        },
+        "time": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time",
+          "description": "Time the error was encountered."
+        }
+      },
+      "type": "object"
+    }
+  }
+}

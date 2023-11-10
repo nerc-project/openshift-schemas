@@ -1,0 +1,26 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "com.github.openshift.api.build.v1.GitLabWebHookCause",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "com.github.openshift.api.build.v1.GitLabWebHookCause": {
+      "description": "GitLabWebHookCause has information about a GitLab webhook that triggered a build.",
+      "properties": {
+        "revision": {
+          "$ref": "#/definitions/com.github.openshift.api.build.v1.SourceRevision",
+          "description": "Revision is the git source revision information of the trigger."
+        },
+        "secret": {
+          "description": "Secret is the obfuscated webhook secret that triggered a build.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

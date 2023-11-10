@@ -1,0 +1,260 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "io.amq.broker.v2alpha2.ActiveMQArtemis",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "io.amq.broker.v2alpha2.ActiveMQArtemis": {
+      "description": "ActiveMQArtemis is the Schema for the activemqartemises API",
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta",
+          "description": "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata"
+        },
+        "spec": {
+          "description": "ActiveMQArtemisSpec defines the desired state of ActiveMQArtemis",
+          "properties": {
+            "acceptors": {
+              "items": {
+                "properties": {
+                  "anycastPrefix": {
+                    "type": "string"
+                  },
+                  "connectionsAllowed": {
+                    "type": "integer"
+                  },
+                  "enabledCipherSuites": {
+                    "type": "string"
+                  },
+                  "enabledProtocols": {
+                    "type": "string"
+                  },
+                  "expose": {
+                    "type": "boolean"
+                  },
+                  "multicastPrefix": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "needClientAuth": {
+                    "type": "boolean"
+                  },
+                  "port": {
+                    "format": "int32",
+                    "type": "integer"
+                  },
+                  "protocols": {
+                    "type": "string"
+                  },
+                  "sniHost": {
+                    "type": "string"
+                  },
+                  "sslEnabled": {
+                    "type": "boolean"
+                  },
+                  "sslProvider": {
+                    "type": "string"
+                  },
+                  "sslSecret": {
+                    "type": "string"
+                  },
+                  "verifyHost": {
+                    "type": "boolean"
+                  },
+                  "wantClientAuth": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "name"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "adminPassword": {
+              "type": "string"
+            },
+            "adminUser": {
+              "type": "string"
+            },
+            "connectors": {
+              "items": {
+                "properties": {
+                  "enabledCipherSuites": {
+                    "type": "string"
+                  },
+                  "enabledProtocols": {
+                    "type": "string"
+                  },
+                  "expose": {
+                    "type": "boolean"
+                  },
+                  "host": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "needClientAuth": {
+                    "type": "boolean"
+                  },
+                  "port": {
+                    "format": "int32",
+                    "type": "integer"
+                  },
+                  "sniHost": {
+                    "type": "string"
+                  },
+                  "sslEnabled": {
+                    "type": "boolean"
+                  },
+                  "sslProvider": {
+                    "type": "string"
+                  },
+                  "sslSecret": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "verifyHost": {
+                    "type": "boolean"
+                  },
+                  "wantClientAuth": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "host",
+                  "name",
+                  "port"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "console": {
+              "properties": {
+                "expose": {
+                  "type": "boolean"
+                },
+                "sslEnabled": {
+                  "type": "boolean"
+                },
+                "sslSecret": {
+                  "type": "string"
+                },
+                "useClientAuth": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "deploymentPlan": {
+              "properties": {
+                "image": {
+                  "type": "string"
+                },
+                "journalType": {
+                  "type": "string"
+                },
+                "messageMigration": {
+                  "type": "boolean"
+                },
+                "persistenceEnabled": {
+                  "type": "boolean"
+                },
+                "requireLogin": {
+                  "type": "boolean"
+                },
+                "size": {
+                  "format": "int32",
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "upgrades": {
+              "description": "ActiveMQArtemis App product upgrade flags",
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                },
+                "minor": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "enabled",
+                "minor"
+              ],
+              "type": "object"
+            },
+            "version": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "status": {
+          "description": "ActiveMQArtemisStatus defines the observed state of ActiveMQArtemis",
+          "properties": {
+            "podStatus": {
+              "properties": {
+                "ready": {
+                  "description": "Deployments are ready to serve requests",
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "starting": {
+                  "description": "Deployments are starting, may or may not succeed",
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "stopped": {
+                  "description": "Deployments are not starting, unclear what next step will be",
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "required": [
+            "podStatus"
+          ],
+          "type": "object"
+        }
+      },
+      "type": "object",
+      "x-kubernetes-group-version-kind": [
+        {
+          "group": "broker.amq.io",
+          "kind": "ActiveMQArtemis",
+          "version": "v2alpha2"
+        }
+      ]
+    }
+  }
+}

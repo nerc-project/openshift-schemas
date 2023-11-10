@@ -1,0 +1,28 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "com.github.openshift.api.authorization.v1.SelfSubjectRulesReviewSpec",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "com.github.openshift.api.authorization.v1.SelfSubjectRulesReviewSpec": {
+      "description": "SelfSubjectRulesReviewSpec adds information about how to conduct the check",
+      "properties": {
+        "scopes": {
+          "description": "Scopes to use for the evaluation.  Empty means \"use the unscoped (full) permissions of the user/groups\". Nil means \"use the scopes on this request\".",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "scopes"
+      ],
+      "type": "object"
+    }
+  }
+}

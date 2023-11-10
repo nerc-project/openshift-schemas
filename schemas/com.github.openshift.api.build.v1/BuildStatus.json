@@ -1,0 +1,82 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "com.github.openshift.api.build.v1.BuildStatus",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "com.github.openshift.api.build.v1.BuildStatus": {
+      "description": "BuildStatus contains the status of a build",
+      "properties": {
+        "cancelled": {
+          "description": "cancelled describes if a cancel event was triggered for the build.",
+          "type": "boolean"
+        },
+        "completionTimestamp": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time",
+          "description": "completionTimestamp is a timestamp representing the server time when this Build was finished, whether that build failed or succeeded.  It reflects the time at which the Pod running the Build terminated. It is represented in RFC3339 form and is in UTC."
+        },
+        "conditions": {
+          "description": "Conditions represents the latest available observations of a build's current state.",
+          "items": {
+            "$ref": "#/definitions/com.github.openshift.api.build.v1.BuildCondition"
+          },
+          "type": "array",
+          "x-kubernetes-patch-merge-key": "type",
+          "x-kubernetes-patch-strategy": "merge"
+        },
+        "config": {
+          "$ref": "#/definitions/io.k8s.api.core.v1.ObjectReference",
+          "description": "config is an ObjectReference to the BuildConfig this Build is based on."
+        },
+        "duration": {
+          "description": "duration contains time.Duration object describing build time.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "logSnippet": {
+          "description": "logSnippet is the last few lines of the build log.  This value is only set for builds that failed.",
+          "type": "string"
+        },
+        "message": {
+          "description": "message is a human-readable message indicating details about why the build has this status.",
+          "type": "string"
+        },
+        "output": {
+          "$ref": "#/definitions/com.github.openshift.api.build.v1.BuildStatusOutput",
+          "description": "output describes the container image the build has produced."
+        },
+        "outputDockerImageReference": {
+          "description": "outputDockerImageReference contains a reference to the container image that will be built by this build. Its value is computed from Build.Spec.Output.To, and should include the registry address, so that it can be used to push and pull the image.",
+          "type": "string"
+        },
+        "phase": {
+          "description": "phase is the point in the build lifecycle. Possible values are \"New\", \"Pending\", \"Running\", \"Complete\", \"Failed\", \"Error\", and \"Cancelled\".",
+          "type": "string"
+        },
+        "reason": {
+          "description": "reason is a brief CamelCase string that describes any failure and is meant for machine parsing and tidy display in the CLI.",
+          "type": "string"
+        },
+        "stages": {
+          "description": "stages contains details about each stage that occurs during the build including start time, duration (in milliseconds), and the steps that occured within each stage.",
+          "items": {
+            "$ref": "#/definitions/com.github.openshift.api.build.v1.StageInfo"
+          },
+          "type": "array"
+        },
+        "startTimestamp": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time",
+          "description": "startTimestamp is a timestamp representing the server time when this Build started running in a Pod. It is represented in RFC3339 form and is in UTC."
+        }
+      },
+      "required": [
+        "phase"
+      ],
+      "type": "object"
+    }
+  }
+}

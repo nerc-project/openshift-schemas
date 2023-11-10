@@ -1,0 +1,57 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "com.github.openshift.api.apps.v1.DeploymentStrategy",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "com.github.openshift.api.apps.v1.DeploymentStrategy": {
+      "description": "DeploymentStrategy describes how to perform a deployment.",
+      "properties": {
+        "activeDeadlineSeconds": {
+          "description": "ActiveDeadlineSeconds is the duration in seconds that the deployer pods for this deployment config may be active on a node before the system actively tries to terminate them.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "annotations": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Annotations is a set of key, value pairs added to custom deployer and lifecycle pre/post hook pods.",
+          "type": "object"
+        },
+        "customParams": {
+          "$ref": "#/definitions/com.github.openshift.api.apps.v1.CustomDeploymentStrategyParams",
+          "description": "CustomParams are the input to the Custom deployment strategy, and may also be specified for the Recreate and Rolling strategies to customize the execution process that runs the deployment."
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Labels is a set of key, value pairs added to custom deployer and lifecycle pre/post hook pods.",
+          "type": "object"
+        },
+        "recreateParams": {
+          "$ref": "#/definitions/com.github.openshift.api.apps.v1.RecreateDeploymentStrategyParams",
+          "description": "RecreateParams are the input to the Recreate deployment strategy."
+        },
+        "resources": {
+          "$ref": "#/definitions/io.k8s.api.core.v1.ResourceRequirements_v2",
+          "description": "Resources contains resource requirements to execute the deployment and any hooks."
+        },
+        "rollingParams": {
+          "$ref": "#/definitions/com.github.openshift.api.apps.v1.RollingDeploymentStrategyParams",
+          "description": "RollingParams are the input to the Rolling deployment strategy."
+        },
+        "type": {
+          "description": "Type is the name of a deployment strategy.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

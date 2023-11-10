@@ -1,0 +1,42 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "com.github.operator-framework.operator-lifecycle-manager.pkg.package-server.apis.operators.v1.PackageChannel",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "com.github.operator-framework.operator-lifecycle-manager.pkg.package-server.apis.operators.v1.PackageChannel": {
+      "description": "PackageChannel defines a single channel under a package, pointing to a version of that package.",
+      "properties": {
+        "currentCSV": {
+          "description": "CurrentCSV defines a reference to the CSV holding the version of this package currently for the channel.",
+          "type": "string"
+        },
+        "currentCSVDesc": {
+          "$ref": "#/definitions/com.github.operator-framework.operator-lifecycle-manager.pkg.package-server.apis.operators.v1.CSVDescription",
+          "description": "CurrentCSVSpec holds the spec of the current CSV"
+        },
+        "entries": {
+          "description": "Entries lists all CSVs in the channel, with their upgrade edges.",
+          "items": {
+            "$ref": "#/definitions/com.github.operator-framework.operator-lifecycle-manager.pkg.package-server.apis.operators.v1.ChannelEntry"
+          },
+          "type": "array"
+        },
+        "name": {
+          "description": "Name is the name of the channel, e.g. `alpha` or `stable`",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "currentCSV",
+        "entries"
+      ],
+      "type": "object"
+    }
+  }
+}

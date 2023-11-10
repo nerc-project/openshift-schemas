@@ -1,0 +1,40 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "com.github.operator-framework.api.pkg.operators.v1alpha1.SpecDescriptor",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "com.github.operator-framework.api.pkg.operators.v1alpha1.SpecDescriptor": {
+      "description": "SpecDescriptor describes a field in a spec block of a CRD so that OLM can consume it",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "value": {
+          "format": "byte",
+          "type": "string"
+        },
+        "x-descriptors": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,163 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "io.rook.ceph.v1.CephBlockPool",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "io.rook.ceph.v1.CephBlockPool": {
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta",
+          "description": "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata"
+        },
+        "spec": {
+          "properties": {
+            "compressionMode": {
+              "enum": [
+                "none",
+                "passive",
+                "aggressive",
+                "force",
+                ""
+              ]
+            },
+            "crushRoot": {},
+            "deviceClass": {},
+            "enableRBDStats": {
+              "type": "boolean"
+            },
+            "erasureCoded": {
+              "properties": {
+                "algorithm": {
+                  "type": "string"
+                },
+                "codingChunks": {
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "dataChunks": {
+                  "minimum": 0,
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "codingChunks",
+                "dataChunks"
+              ],
+              "type": "object"
+            },
+            "failureDomain": {
+              "type": "string"
+            },
+            "mirroring": {
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                },
+                "mode": {
+                  "type": "string"
+                },
+                "peers": {},
+                "snapshotSchedules": {
+                  "items": {
+                    "properties": {
+                      "interval": {
+                        "type": "string"
+                      },
+                      "path": {
+                        "type": "string"
+                      },
+                      "startTime": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            },
+            "name": {
+              "enum": [
+                "device_health_metrics",
+                ".nfs",
+                ".mgr"
+              ],
+              "type": "string"
+            },
+            "parameters": {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "x-kubernetes-preserve-unknown-fields": true
+            },
+            "quotas": {},
+            "replicated": {
+              "properties": {
+                "hybridStorage": {
+                  "required": [
+                    "primaryDeviceClass",
+                    "secondaryDeviceClass"
+                  ]
+                },
+                "replicasPerFailureDomain": {
+                  "minimum": 1,
+                  "type": "integer"
+                },
+                "requireSafeReplicaSize": {
+                  "type": "boolean"
+                },
+                "size": {
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "subFailureDomain": {
+                  "type": "string"
+                },
+                "targetSizeRatio": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "size"
+              ],
+              "type": "object"
+            },
+            "statusCheck": {
+              "x-kubernetes-preserve-unknown-fields": true
+            }
+          },
+          "type": "object"
+        },
+        "status": {
+          "x-kubernetes-preserve-unknown-fields": true
+        }
+      },
+      "required": [
+        "metadata",
+        "spec"
+      ],
+      "type": "object",
+      "x-kubernetes-group-version-kind": [
+        {
+          "group": "ceph.rook.io",
+          "kind": "CephBlockPool",
+          "version": "v1"
+        }
+      ]
+    }
+  }
+}

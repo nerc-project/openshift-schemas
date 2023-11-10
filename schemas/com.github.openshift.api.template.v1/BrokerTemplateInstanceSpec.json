@@ -1,0 +1,37 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "com.github.openshift.api.template.v1.BrokerTemplateInstanceSpec",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "com.github.openshift.api.template.v1.BrokerTemplateInstanceSpec": {
+      "description": "BrokerTemplateInstanceSpec describes the state of a BrokerTemplateInstance.",
+      "properties": {
+        "bindingIDs": {
+          "description": "bindingids is a list of 'binding_id's provided during successive bind calls to the template service broker.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "secret": {
+          "$ref": "#/definitions/io.k8s.api.core.v1.ObjectReference",
+          "description": "secret is a reference to a Secret object residing in a namespace, containing the necessary template parameters."
+        },
+        "templateInstance": {
+          "$ref": "#/definitions/io.k8s.api.core.v1.ObjectReference",
+          "description": "templateinstance is a reference to a TemplateInstance object residing in a namespace."
+        }
+      },
+      "required": [
+        "templateInstance",
+        "secret"
+      ],
+      "type": "object"
+    }
+  }
+}

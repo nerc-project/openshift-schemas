@@ -1,0 +1,97 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "com.github.openshift.api.image.v1.Image",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "com.github.openshift.api.image.v1.Image": {
+      "description": "Image is an immutable representation of a container image and metadata at a point in time. Images are named by taking a hash of their contents (metadata and content) and any change in format, content, or metadata results in a new name. The images resource is primarily for use by cluster administrators and integrations like the cluster image registry - end users instead access images via the imagestreamtags or imagestreamimages resources. While image metadata is stored in the API, any integration that implements the container image registry API must provide its own storage for the raw manifest data, image config, and layer contents.\n\nCompatibility level 1: Stable within a major release for a minimum of 12 months or 3 minor releases (whichever is longer).",
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+          "type": "string"
+        },
+        "dockerImageConfig": {
+          "description": "DockerImageConfig is a JSON blob that the runtime uses to set up the container. This is a part of manifest schema v2. Will not be set when the image represents a manifest list.",
+          "type": "string"
+        },
+        "dockerImageLayers": {
+          "description": "DockerImageLayers represents the layers in the image. May not be set if the image does not define that data or if the image represents a manifest list.",
+          "items": {
+            "$ref": "#/definitions/com.github.openshift.api.image.v1.ImageLayer"
+          },
+          "type": "array"
+        },
+        "dockerImageManifest": {
+          "description": "DockerImageManifest is the raw JSON of the manifest",
+          "type": "string"
+        },
+        "dockerImageManifestMediaType": {
+          "description": "DockerImageManifestMediaType specifies the mediaType of manifest. This is a part of manifest schema v2.",
+          "type": "string"
+        },
+        "dockerImageManifests": {
+          "description": "DockerImageManifests holds information about sub-manifests when the image represents a manifest list. When this field is present, no DockerImageLayers should be specified.",
+          "items": {
+            "$ref": "#/definitions/com.github.openshift.api.image.v1.ImageManifest"
+          },
+          "type": "array"
+        },
+        "dockerImageMetadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.runtime.RawExtension",
+          "description": "DockerImageMetadata contains metadata about this image",
+          "x-kubernetes-patch-strategy": "replace"
+        },
+        "dockerImageMetadataVersion": {
+          "description": "DockerImageMetadataVersion conveys the version of the object, which if empty defaults to \"1.0\"",
+          "type": "string"
+        },
+        "dockerImageReference": {
+          "description": "DockerImageReference is the string that can be used to pull this image.",
+          "type": "string"
+        },
+        "dockerImageSignatures": {
+          "description": "DockerImageSignatures provides the signatures as opaque blobs. This is a part of manifest schema v1.",
+          "items": {
+            "format": "byte",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
+        },
+        "signatures": {
+          "description": "Signatures holds all signatures of the image.",
+          "items": {
+            "$ref": "#/definitions/com.github.openshift.api.image.v1.ImageSignature"
+          },
+          "type": "array",
+          "x-kubernetes-patch-merge-key": "name",
+          "x-kubernetes-patch-strategy": "merge"
+        }
+      },
+      "type": "object",
+      "x-kubernetes-group-version-kind": [
+        {
+          "group": "",
+          "kind": "Image",
+          "version": "v1"
+        },
+        {
+          "group": "image.openshift.io",
+          "kind": "Image",
+          "version": "v1"
+        }
+      ]
+    }
+  }
+}

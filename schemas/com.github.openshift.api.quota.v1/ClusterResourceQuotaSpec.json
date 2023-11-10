@@ -1,0 +1,30 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "com.github.openshift.api.quota.v1.ClusterResourceQuotaSpec",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "com.github.openshift.api.quota.v1.ClusterResourceQuotaSpec": {
+      "description": "ClusterResourceQuotaSpec defines the desired quota restrictions",
+      "properties": {
+        "quota": {
+          "$ref": "#/definitions/io.k8s.api.core.v1.ResourceQuotaSpec",
+          "description": "Quota defines the desired quota"
+        },
+        "selector": {
+          "$ref": "#/definitions/com.github.openshift.api.quota.v1.ClusterResourceQuotaSelector",
+          "description": "Selector is the selector used to match projects. It should only select active projects on the scale of dozens (though it can select many more less active projects).  These projects will contend on object creation through this resource."
+        }
+      },
+      "required": [
+        "selector",
+        "quota"
+      ],
+      "type": "object"
+    }
+  }
+}

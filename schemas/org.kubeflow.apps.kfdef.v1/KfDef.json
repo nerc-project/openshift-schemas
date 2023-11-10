@@ -1,0 +1,62 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "org.kubeflow.apps.kfdef.v1.KfDef",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "org.kubeflow.apps.kfdef.v1.KfDef": {
+      "description": "KfDef is the Schema for the kfdefs API",
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta",
+          "description": "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata"
+        },
+        "spec": {
+          "description": "KfDefSpec defines the desired state of KfDef",
+          "properties": {
+            "applications": {
+              "items": {
+                "x-kubernetes-preserve-unknown-fields": true
+              },
+              "type": "array"
+            },
+            "repos": {
+              "items": {
+                "x-kubernetes-preserve-unknown-fields": true
+              },
+              "type": "array"
+            },
+            "version": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "status": {
+          "description": "KfDefStatus defines the observed state of KfDef",
+          "x-kubernetes-preserve-unknown-fields": true
+        }
+      },
+      "type": "object",
+      "x-kubernetes-group-version-kind": [
+        {
+          "group": "kfdef.apps.kubeflow.org",
+          "kind": "KfDef",
+          "version": "v1"
+        }
+      ]
+    }
+  }
+}

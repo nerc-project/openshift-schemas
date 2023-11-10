@@ -1,0 +1,44 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "com.github.openshift.api.build.v1.BuildVolume",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "com.github.openshift.api.build.v1.BuildVolume": {
+      "description": "BuildVolume describes a volume that is made available to build pods, such that it can be mounted into buildah's runtime environment. Only a subset of Kubernetes Volume sources are supported.",
+      "properties": {
+        "mounts": {
+          "description": "mounts represents the location of the volume in the image build container",
+          "items": {
+            "$ref": "#/definitions/com.github.openshift.api.build.v1.BuildVolumeMount"
+          },
+          "type": "array",
+          "x-kubernetes-list-map-keys": [
+            "destinationPath"
+          ],
+          "x-kubernetes-list-type": "map",
+          "x-kubernetes-patch-merge-key": "destinationPath",
+          "x-kubernetes-patch-strategy": "merge"
+        },
+        "name": {
+          "description": "name is a unique identifier for this BuildVolume. It must conform to the Kubernetes DNS label standard and be unique within the pod. Names that collide with those added by the build controller will result in a failed build with an error message detailing which name caused the error. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/definitions/com.github.openshift.api.build.v1.BuildVolumeSource",
+          "description": "source represents the location and type of the mounted volume."
+        }
+      },
+      "required": [
+        "name",
+        "source",
+        "mounts"
+      ],
+      "type": "object"
+    }
+  }
+}

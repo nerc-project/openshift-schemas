@@ -1,0 +1,36 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "com.github.openshift.api.image.v1.RepositoryImportStatus",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "com.github.openshift.api.image.v1.RepositoryImportStatus": {
+      "description": "RepositoryImportStatus describes the result of an image repository import",
+      "properties": {
+        "additionalTags": {
+          "description": "AdditionalTags are tags that exist in the repository but were not imported because a maximum limit of automatic imports was applied.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "images": {
+          "description": "Images is a list of images successfully retrieved by the import of the repository.",
+          "items": {
+            "$ref": "#/definitions/com.github.openshift.api.image.v1.ImageImportStatus"
+          },
+          "type": "array"
+        },
+        "status": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Status",
+          "description": "Status reflects whether any failure occurred during import"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

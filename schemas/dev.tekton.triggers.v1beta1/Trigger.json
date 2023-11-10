@@ -1,0 +1,22 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "dev.tekton.triggers.v1beta1.Trigger",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "dev.tekton.triggers.v1beta1.Trigger": {
+      "type": "object",
+      "x-kubernetes-group-version-kind": [
+        {
+          "group": "triggers.tekton.dev",
+          "kind": "Trigger",
+          "version": "v1beta1"
+        }
+      ]
+    }
+  }
+}

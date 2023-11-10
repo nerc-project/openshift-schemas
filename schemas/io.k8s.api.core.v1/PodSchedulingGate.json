@@ -1,0 +1,25 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "io.k8s.api.core.v1.PodSchedulingGate",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "io.k8s.api.core.v1.PodSchedulingGate": {
+      "description": "PodSchedulingGate is associated to a Pod to guard its scheduling.",
+      "properties": {
+        "name": {
+          "description": "Name of the scheduling gate. Each scheduling gate must have a unique name field.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "type": "object"
+    }
+  }
+}

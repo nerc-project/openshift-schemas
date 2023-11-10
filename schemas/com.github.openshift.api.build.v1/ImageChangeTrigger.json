@@ -1,0 +1,30 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "com.github.openshift.api.build.v1.ImageChangeTrigger",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "com.github.openshift.api.build.v1.ImageChangeTrigger": {
+      "description": "ImageChangeTrigger allows builds to be triggered when an ImageStream changes",
+      "properties": {
+        "from": {
+          "$ref": "#/definitions/io.k8s.api.core.v1.ObjectReference",
+          "description": "from is a reference to an ImageStreamTag that will trigger a build when updated It is optional. If no From is specified, the From image from the build strategy will be used. Only one ImageChangeTrigger with an empty From reference is allowed in a build configuration."
+        },
+        "lastTriggeredImageID": {
+          "description": "lastTriggeredImageID is used internally by the ImageChangeController to save last used image ID for build This field is deprecated and will be removed in a future release. Deprecated",
+          "type": "string"
+        },
+        "paused": {
+          "description": "paused is true if this trigger is temporarily disabled. Optional.",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

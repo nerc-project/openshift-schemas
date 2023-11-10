@@ -1,0 +1,29 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "com.github.openshift.api.quota.v1.ClusterResourceQuotaSelector",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "com.github.openshift.api.quota.v1.ClusterResourceQuotaSelector": {
+      "description": "ClusterResourceQuotaSelector is used to select projects.  At least one of LabelSelector or AnnotationSelector must present.  If only one is present, it is the only selection criteria.  If both are specified, the project must match both restrictions.",
+      "properties": {
+        "annotations": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "AnnotationSelector is used to select projects by annotation.",
+          "type": "object"
+        },
+        "labels": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector",
+          "description": "LabelSelector is used to select projects by label."
+        }
+      },
+      "type": "object"
+    }
+  }
+}

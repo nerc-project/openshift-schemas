@@ -1,0 +1,133 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "io.strimzi.core.v1beta2.StrimziPodSet",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "io.strimzi.core.v1beta2.StrimziPodSet": {
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta",
+          "description": "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata"
+        },
+        "spec": {
+          "description": "The specification of the StrimziPodSet.",
+          "properties": {
+            "pods": {
+              "description": "The Pods managed by this StrimziPodSet.",
+              "items": {
+                "x-kubernetes-preserve-unknown-fields": true
+              },
+              "type": "array"
+            },
+            "selector": {
+              "description": "Selector is a label query which matches all the pods managed by this `StrimziPodSet`. Only `matchLabels` is supported. If `matchExpressions` is set, it will be ignored.",
+              "properties": {
+                "matchExpressions": {
+                  "items": {
+                    "properties": {
+                      "key": {
+                        "type": "string"
+                      },
+                      "operator": {
+                        "type": "string"
+                      },
+                      "values": {
+                        "items": {
+                          "type": "string"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "matchLabels": {
+                  "x-kubernetes-preserve-unknown-fields": true
+                }
+              },
+              "type": "object"
+            }
+          },
+          "required": [
+            "selector",
+            "pods"
+          ],
+          "type": "object"
+        },
+        "status": {
+          "description": "The status of the StrimziPodSet.",
+          "properties": {
+            "conditions": {
+              "description": "List of status conditions.",
+              "items": {
+                "properties": {
+                  "lastTransitionTime": {
+                    "description": "Last time the condition of a type changed from one status to another. The required format is 'yyyy-MM-ddTHH:mm:ssZ', in the UTC time zone.",
+                    "type": "string"
+                  },
+                  "message": {
+                    "description": "Human-readable message indicating details about the condition's last transition.",
+                    "type": "string"
+                  },
+                  "reason": {
+                    "description": "The reason for the condition's last transition (a single word in CamelCase).",
+                    "type": "string"
+                  },
+                  "status": {
+                    "description": "The status of the condition, either True, False or Unknown.",
+                    "type": "string"
+                  },
+                  "type": {
+                    "description": "The unique identifier of a condition, used to distinguish between other conditions in the resource.",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "currentPods": {
+              "description": "Number of pods managed by the StrimziPodSet controller that have the current revision.",
+              "type": "integer"
+            },
+            "observedGeneration": {
+              "description": "The generation of the CRD that was last reconciled by the operator.",
+              "type": "integer"
+            },
+            "pods": {
+              "description": "Number of pods managed by the StrimziPodSet controller.",
+              "type": "integer"
+            },
+            "readyPods": {
+              "description": "Number of pods managed by the StrimziPodSet controller that are ready.",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object",
+      "x-kubernetes-group-version-kind": [
+        {
+          "group": "core.strimzi.io",
+          "kind": "StrimziPodSet",
+          "version": "v1beta2"
+        }
+      ]
+    }
+  }
+}

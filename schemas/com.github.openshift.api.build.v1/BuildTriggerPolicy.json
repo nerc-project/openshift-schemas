@@ -1,0 +1,45 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "com.github.openshift.api.build.v1.BuildTriggerPolicy",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "com.github.openshift.api.build.v1.BuildTriggerPolicy": {
+      "description": "BuildTriggerPolicy describes a policy for a single trigger that results in a new Build.",
+      "properties": {
+        "bitbucket": {
+          "$ref": "#/definitions/com.github.openshift.api.build.v1.WebHookTrigger",
+          "description": "BitbucketWebHook contains the parameters for a Bitbucket webhook type of trigger"
+        },
+        "generic": {
+          "$ref": "#/definitions/com.github.openshift.api.build.v1.WebHookTrigger",
+          "description": "generic contains the parameters for a Generic webhook type of trigger"
+        },
+        "github": {
+          "$ref": "#/definitions/com.github.openshift.api.build.v1.WebHookTrigger",
+          "description": "github contains the parameters for a GitHub webhook type of trigger"
+        },
+        "gitlab": {
+          "$ref": "#/definitions/com.github.openshift.api.build.v1.WebHookTrigger",
+          "description": "GitLabWebHook contains the parameters for a GitLab webhook type of trigger"
+        },
+        "imageChange": {
+          "$ref": "#/definitions/com.github.openshift.api.build.v1.ImageChangeTrigger",
+          "description": "imageChange contains parameters for an ImageChange type of trigger"
+        },
+        "type": {
+          "description": "type is the type of build trigger. Valid values:\n\n- GitHub GitHubWebHookBuildTriggerType represents a trigger that launches builds on GitHub webhook invocations\n\n- Generic GenericWebHookBuildTriggerType represents a trigger that launches builds on generic webhook invocations\n\n- GitLab GitLabWebHookBuildTriggerType represents a trigger that launches builds on GitLab webhook invocations\n\n- Bitbucket BitbucketWebHookBuildTriggerType represents a trigger that launches builds on Bitbucket webhook invocations\n\n- ImageChange ImageChangeBuildTriggerType represents a trigger that launches builds on availability of a new version of an image\n\n- ConfigChange ConfigChangeBuildTriggerType will trigger a build on an initial build config creation WARNING: In the future the behavior will change to trigger a build on any config change",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "type": "object"
+    }
+  }
+}

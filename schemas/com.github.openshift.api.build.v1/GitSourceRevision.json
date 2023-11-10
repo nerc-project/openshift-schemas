@@ -1,0 +1,34 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "com.github.openshift.api.build.v1.GitSourceRevision",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "com.github.openshift.api.build.v1.GitSourceRevision": {
+      "description": "GitSourceRevision is the commit information from a git source for a build",
+      "properties": {
+        "author": {
+          "$ref": "#/definitions/com.github.openshift.api.build.v1.SourceControlUser",
+          "description": "author is the author of a specific commit"
+        },
+        "commit": {
+          "description": "commit is the commit hash identifying a specific commit",
+          "type": "string"
+        },
+        "committer": {
+          "$ref": "#/definitions/com.github.openshift.api.build.v1.SourceControlUser",
+          "description": "committer is the committer of a specific commit"
+        },
+        "message": {
+          "description": "message is the description of a specific commit",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

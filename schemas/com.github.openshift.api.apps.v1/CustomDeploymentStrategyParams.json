@@ -1,0 +1,36 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "com.github.openshift.api.apps.v1.CustomDeploymentStrategyParams",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "com.github.openshift.api.apps.v1.CustomDeploymentStrategyParams": {
+      "description": "CustomDeploymentStrategyParams are the input to the Custom deployment strategy.",
+      "properties": {
+        "command": {
+          "description": "Command is optional and overrides CMD in the container Image.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "environment": {
+          "description": "Environment holds the environment which will be given to the container for Image.",
+          "items": {
+            "$ref": "#/definitions/io.k8s.api.core.v1.EnvVar"
+          },
+          "type": "array"
+        },
+        "image": {
+          "description": "Image specifies a container image which can carry out a deployment.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

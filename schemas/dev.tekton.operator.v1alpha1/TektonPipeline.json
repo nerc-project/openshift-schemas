@@ -1,0 +1,22 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "dev.tekton.operator.v1alpha1.TektonPipeline",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "dev.tekton.operator.v1alpha1.TektonPipeline": {
+      "type": "object",
+      "x-kubernetes-group-version-kind": [
+        {
+          "group": "operator.tekton.dev",
+          "kind": "TektonPipeline",
+          "version": "v1alpha1"
+        }
+      ]
+    }
+  }
+}

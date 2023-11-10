@@ -1,0 +1,54 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "com.github.openshift.api.image.v1.ImageStreamLayers",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "com.github.openshift.api.image.v1.ImageStreamLayers": {
+      "description": "ImageStreamLayers describes information about the layers referenced by images in this image stream.\n\nCompatibility level 1: Stable within a major release for a minimum of 12 months or 3 minor releases (whichever is longer).",
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+          "type": "string"
+        },
+        "blobs": {
+          "additionalProperties": {
+            "$ref": "#/definitions/com.github.openshift.api.image.v1.ImageLayerData"
+          },
+          "description": "blobs is a map of blob name to metadata about the blob.",
+          "type": "object"
+        },
+        "images": {
+          "additionalProperties": {
+            "$ref": "#/definitions/com.github.openshift.api.image.v1.ImageBlobReferences"
+          },
+          "description": "images is a map between an image name and the names of the blobs and config that comprise the image.",
+          "type": "object"
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
+        }
+      },
+      "required": [
+        "blobs",
+        "images"
+      ],
+      "type": "object",
+      "x-kubernetes-group-version-kind": [
+        {
+          "group": "image.openshift.io",
+          "kind": "ImageStreamLayers",
+          "version": "v1"
+        }
+      ]
+    }
+  }
+}

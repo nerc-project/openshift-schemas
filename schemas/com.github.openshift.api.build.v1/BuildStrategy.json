@@ -1,0 +1,38 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "com.github.openshift.api.build.v1.BuildStrategy",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "com.github.openshift.api.build.v1.BuildStrategy": {
+      "description": "BuildStrategy contains the details of how to perform a build.",
+      "properties": {
+        "customStrategy": {
+          "$ref": "#/definitions/com.github.openshift.api.build.v1.CustomBuildStrategy",
+          "description": "customStrategy holds the parameters to the Custom build strategy"
+        },
+        "dockerStrategy": {
+          "$ref": "#/definitions/com.github.openshift.api.build.v1.DockerBuildStrategy",
+          "description": "dockerStrategy holds the parameters to the container image build strategy."
+        },
+        "jenkinsPipelineStrategy": {
+          "$ref": "#/definitions/com.github.openshift.api.build.v1.JenkinsPipelineBuildStrategy",
+          "description": "JenkinsPipelineStrategy holds the parameters to the Jenkins Pipeline build strategy. Deprecated: use OpenShift Pipelines"
+        },
+        "sourceStrategy": {
+          "$ref": "#/definitions/com.github.openshift.api.build.v1.SourceBuildStrategy",
+          "description": "sourceStrategy holds the parameters to the Source build strategy."
+        },
+        "type": {
+          "description": "type is the kind of build strategy.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "com.github.openshift.api.build.v1.BuildConfigSpec",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "com.github.openshift.api.build.v1.BuildConfigSpec": {
+      "description": "BuildConfigSpec describes when and how builds are created",
+      "properties": {
+        "completionDeadlineSeconds": {
+          "description": "completionDeadlineSeconds is an optional duration in seconds, counted from the time when a build pod gets scheduled in the system, that the build may be active on a node before the system actively tries to terminate the build; value must be positive integer",
+          "format": "int64",
+          "type": "integer"
+        },
+        "failedBuildsHistoryLimit": {
+          "description": "failedBuildsHistoryLimit is the number of old failed builds to retain. When a BuildConfig is created, the 5 most recent failed builds are retained unless this value is set. If removed after the BuildConfig has been created, all failed builds are retained.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "mountTrustedCA": {
+          "description": "mountTrustedCA bind mounts the cluster's trusted certificate authorities, as defined in the cluster's proxy configuration, into the build. This lets processes within a build trust components signed by custom PKI certificate authorities, such as private artifact repositories and HTTPS proxies.\n\nWhen this field is set to true, the contents of `/etc/pki/ca-trust` within the build are managed by the build container, and any changes to this directory or its subdirectories (for example - within a Dockerfile `RUN` instruction) are not persisted in the build's output image.",
+          "type": "boolean"
+        },
+        "nodeSelector": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "nodeSelector is a selector which must be true for the build pod to fit on a node If nil, it can be overridden by default build nodeselector values for the cluster. If set to an empty map or a map with any values, default build nodeselector values are ignored.",
+          "type": "object"
+        },
+        "output": {
+          "$ref": "#/definitions/com.github.openshift.api.build.v1.BuildOutput",
+          "description": "output describes the container image the Strategy should produce."
+        },
+        "postCommit": {
+          "$ref": "#/definitions/com.github.openshift.api.build.v1.BuildPostCommitSpec",
+          "description": "postCommit is a build hook executed after the build output image is committed, before it is pushed to a registry."
+        },
+        "resources": {
+          "$ref": "#/definitions/io.k8s.api.core.v1.ResourceRequirements_v2",
+          "description": "resources computes resource requirements to execute the build."
+        },
+        "revision": {
+          "$ref": "#/definitions/com.github.openshift.api.build.v1.SourceRevision",
+          "description": "revision is the information from the source for a specific repo snapshot. This is optional."
+        },
+        "runPolicy": {
+          "description": "RunPolicy describes how the new build created from this build configuration will be scheduled for execution. This is optional, if not specified we default to \"Serial\".",
+          "type": "string"
+        },
+        "serviceAccount": {
+          "description": "serviceAccount is the name of the ServiceAccount to use to run the pod created by this build. The pod will be allowed to use secrets referenced by the ServiceAccount",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/definitions/com.github.openshift.api.build.v1.BuildSource",
+          "description": "source describes the SCM in use."
+        },
+        "strategy": {
+          "$ref": "#/definitions/com.github.openshift.api.build.v1.BuildStrategy",
+          "description": "strategy defines how to perform a build."
+        },
+        "successfulBuildsHistoryLimit": {
+          "description": "successfulBuildsHistoryLimit is the number of old successful builds to retain. When a BuildConfig is created, the 5 most recent successful builds are retained unless this value is set. If removed after the BuildConfig has been created, all successful builds are retained.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "triggers": {
+          "description": "triggers determine how new Builds can be launched from a BuildConfig. If no triggers are defined, a new build can only occur as a result of an explicit client build creation.",
+          "items": {
+            "$ref": "#/definitions/com.github.openshift.api.build.v1.BuildTriggerPolicy"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "strategy"
+      ],
+      "type": "object"
+    }
+  }
+}

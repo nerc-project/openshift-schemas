@@ -1,0 +1,29 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "com.github.openshift.api.build.v1.SourceRevision",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "com.github.openshift.api.build.v1.SourceRevision": {
+      "description": "SourceRevision is the revision or commit information from the source for the build",
+      "properties": {
+        "git": {
+          "$ref": "#/definitions/com.github.openshift.api.build.v1.GitSourceRevision",
+          "description": "Git contains information about git-based build source"
+        },
+        "type": {
+          "description": "type of the build source, may be one of 'Source', 'Dockerfile', 'Binary', or 'Images'",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "type": "object"
+    }
+  }
+}

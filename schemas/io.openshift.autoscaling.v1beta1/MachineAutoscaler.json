@@ -1,0 +1,114 @@
+{
+  "apiVersion": "org.openapis.spec/v3",
+  "kind": "OpenAPISchema",
+  "metadata": {
+    "name": "io.openshift.autoscaling.v1beta1.MachineAutoscaler",
+    "annotations": {
+      "source-cluster": "nerc-ocp-prod"
+    }
+  },
+  "definitions": {
+    "io.openshift.autoscaling.v1beta1.MachineAutoscaler": {
+      "description": "MachineAutoscaler is the Schema for the machineautoscalers API",
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta",
+          "description": "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata"
+        },
+        "spec": {
+          "description": "Specification of constraints of a scalable resource",
+          "properties": {
+            "maxReplicas": {
+              "description": "MaxReplicas constrains the maximal number of replicas of a scalable resource",
+              "format": "int32",
+              "minimum": 1,
+              "type": "integer"
+            },
+            "minReplicas": {
+              "description": "MinReplicas constrains the minimal number of replicas of a scalable resource",
+              "format": "int32",
+              "minimum": 0,
+              "type": "integer"
+            },
+            "scaleTargetRef": {
+              "description": "ScaleTargetRef holds reference to a scalable resource",
+              "properties": {
+                "apiVersion": {
+                  "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                  "type": "string"
+                },
+                "kind": {
+                  "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "name": {
+                  "description": "Name specifies a name of an object, e.g. worker-us-east-1a. Scalable resources are expected to exist under a single namespace.",
+                  "minLength": 1,
+                  "type": "string"
+                }
+              },
+              "required": [
+                "kind",
+                "name"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "maxReplicas",
+            "minReplicas",
+            "scaleTargetRef"
+          ],
+          "type": "object"
+        },
+        "status": {
+          "description": "Most recently observed status of a scalable resource",
+          "properties": {
+            "lastTargetRef": {
+              "description": "LastTargetRef holds reference to the recently observed scalable resource",
+              "properties": {
+                "apiVersion": {
+                  "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                  "type": "string"
+                },
+                "kind": {
+                  "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "name": {
+                  "description": "Name specifies a name of an object, e.g. worker-us-east-1a. Scalable resources are expected to exist under a single namespace.",
+                  "minLength": 1,
+                  "type": "string"
+                }
+              },
+              "required": [
+                "kind",
+                "name"
+              ],
+              "type": "object"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object",
+      "x-kubernetes-group-version-kind": [
+        {
+          "group": "autoscaling.openshift.io",
+          "kind": "MachineAutoscaler",
+          "version": "v1beta1"
+        }
+      ]
+    }
+  }
+}
