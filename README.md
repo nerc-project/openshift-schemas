@@ -14,24 +14,22 @@ You will need a recent Python, the [`click`](https://click.palletsprojects.com/)
 To update this repository with schemas from your currently cluster:
 
 ```
-make clean all
+./refresh-schemas.sh
 ```
 
 This will:
 
-1. Fetch OpenAPI schemas from the remote cluster
-2. Split the schema definitions into individual files under the `schemas` directory (wrapped with a bogus metadata header to make kustomize happy)
-3. Re-generate `schemas/kustomization.yaml`
+1. Fetch OpenAPI schemas from the remote cluster (using `./schemautil fetch`)
+2. Split the schema definitions into individual files under the `schemas` directory (using `./schemautil split`)
+4. Re-generate `schemas/kustomization.yaml` (using `./schemautil kustomize`)
 
-This process may modify existing schemas and may add new ones. In most cases, you will want update the repository like this:
+At this point, you need to add new schemas to the repository. If you only want new schemas (that is, you want to ignore any modifications to existing schemas), you can do something like this:
 
 ```
-git checkout schemas
+git checkout schemas/*/*.json
 git add schemas
+git commit ...
 ```
-
-This will ignore modifications and add new schemas.
-
 ## Generating the merged schema
 
 To generate the final `openshift-api-schema.json` document, run:
