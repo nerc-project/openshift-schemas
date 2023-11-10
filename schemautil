@@ -7,27 +7,78 @@ import subprocess
 import sys
 
 from pathlib import Path
+from typing import Any, Self
 
 LOG = logging.getLogger(__name__)
+
+
+class Schema:
+    def __init__(
+        self,
+        name: str,
+        definition: dict[str, Any],
+        labels: None | dict[str, str] = None,
+        annotations: None | dict[str, str] = None,
+    ):
+        self.name = name
+        self.definition = definition
+        self.annotations = annotations if annotations else {}
+        self.labels = labels if labels else {}
+
+    def __str__(self) -> str:
+        return f"<Schema {self.name}>"
+
+    @classmethod
+    def from_manifest(cls, manifest: dict[str, Any]) -> Self:
+        name = manifest["metadata"]["name"]
+        labels = manifest["metadata"].get("labels")
+        annotations = manifest["metadata"].get("annotations")
+
+        return cls(
+            name, manifest["definitions"][name], labels=labels, annotations=annotations
+        )
+
+    @classmethod
+    def from_manifest_file(cls, path: str | Path) -> Self:
+        with Path(path).open("r") as fd:
+            manifest = json.load(fd)
+            return cls.from_manifest(manifest)
+
+    def as_dict(self) -> dict[str, Any]:
+        metadata = {"name": self.name}
+        if self.labels:
+            metadata["labels"] = self.labels
+        if self.annotations:
+            metadata["annotations"] = self.annotations
+
+        return {
+            "apiVersion": "org.openapis.spec/v3",
+            "kind": "OpenAPISchema",
+            "metadata": metadata,
+            "definitions": {
+                self.name: self.definition,
+            },
+        }
+
+    def update_labels(self, labels: list[str]) -> None:
+        self.update_kvlist("labels", labels)
+
+    def update_annotations(self, annotations: list[str]) -> None:
+        self.update_kvlist("annotations", annotations)
+
+    def update_kvlist(self, name: str, kvlist: list[str]) -> None:
+        kvdict = dict(x.split("=", 1) for x in kvlist)
+        setattr(
+            self,
+            name,
+            {k: v for k, v in (getattr(self, name, {}) | kvdict).items() if v != "-"},
+        )
 
 
 @click.group()
 @click.option("--verbose", "-v", count=True)
 def main(verbose):
     init_logging(verbose)
-
-
-def wrap_schema(name, schema):
-    return {
-        "apiVersion": "org.openapis.spec/v3",
-        "kind": "OpenAPISchema",
-        "metadata": {
-            "name": name,
-        },
-        "definitions": {
-            name: schema,
-        },
-    }
 
 
 @main.command("kustomize")
@@ -44,19 +95,19 @@ def generate_kustomization(schema_directory):
 
 
 @main.command("regenerate")
+@click.option("--label", "-l", "labels", multiple=True)
+@click.option("--annotation", "-a", "annotations", multiple=True)
 @click.argument("schema_directory", type=Path)
-def regenerate_schemas(schema_directory):
+def regenerate_schemas(schema_directory, labels, annotations):
     for schemafile in schema_directory.rglob("*.json"):
-        with schemafile.open("r") as fd:
-            spec = json.load(fd)
-
-        name = spec["metadata"]["name"]
-        schema = spec["definitions"][name]
-        LOG.debug("processing %s", name)
+        schema = Schema.from_manifest_file(schemafile)
+        schema.update_labels(labels)
+        schema.update_annotations(annotations)
+        LOG.debug("processing %s", schema.name)
 
         with schemafile.open("w") as fd:
             json.dump(
-                wrap_schema(name, schema),
+                schema.as_dict(),
                 fd,
                 indent=2,
             )
@@ -73,21 +124,27 @@ def fetch_schemas(output):
 
 @main.command("split")
 @click.option("-d", "--schema-directory", default="schemas", type=Path)
+@click.option("--label", "-l", "labels", multiple=True)
+@click.option("--annotation", "-a", "annotations", multiple=True)
 @click.argument("schemas", type=click.File(mode="r"))
-def split_schemas(schema_directory, schemas):
+def split_schemas(schema_directory, schemas, labels, annotations):
     LOG.info("splitting schemas")
 
     with schemas as fd:
         all_schemas = json.load(fd)
 
-    for name, schema in all_schemas["definitions"].items():
+    for name, definition in all_schemas["definitions"].items():
         LOG.debug("processing %s", name)
         apiversion, kind = name.rsplit(".", 1)
         path = schema_directory / apiversion
         path.mkdir(parents=True, exist_ok=True)
 
+        schema = Schema(name, definition)
+        schema.update_labels(labels)
+        schema.update_annotations(annotations)
+
         with (path / f"{kind}.json").open("w") as fd:
-            json.dump(wrap_schema(name, schema), fd, indent=2)
+            json.dump(schema.as_dict(), fd, indent=2)
             fd.write("\n")
 
 
